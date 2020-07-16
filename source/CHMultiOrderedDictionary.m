@@ -1,5 +1,12 @@
 /*
- CHDataStructures.framework -- CHMultiDictionary.m
+ CHDataStructures.framework -- CHMultiOrderedDictionary.m
+
+ CHMultiOrderedDictionary is very heavily based on CHMultiDictionary. Modifications to support the ordering were made by Christopher James Elphinstone Chandler
+ 
+	Copyright © 2013-2015	Christopher James Elphinstone Chandler, Russell Geoffrey Watts. All Rights Reserved.
+	Copyright © 2015-2019	Kinnami Software Corporation. All Rights Reserved.
+
+ CHMultiDictionary:
  
  Copyright (c) 2008-2010, Quinn Taylor <http://homepage.mac.com/quinntaylor>
  
@@ -10,25 +17,25 @@
  The software is  provided "as is", without warranty of any kind, including all implied warranties of merchantability and fitness. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
  */
 
-#import "CHMultiDictionary.h"
+#import "CHMultiOrderedDictionary.h"
 
 /**
- Utility function for creating a new NSMutableSet containing object; if object is a set or array, the set containts all objects in the collection.
+ Utility function for creating a new CHOrderedSet containing object; if object is a set or array, the set containts all objects in the collection.
  */
-static inline NSMutableSet* createMutableSetFromObject(id object) {
+static inline CHOrderedSet* createOrderedSetFromObject(id object) {
 	if (object == nil)
 		return nil;
-	if ([object isKindOfClass:[NSSet class]])
-		return [NSMutableSet setWithSet:object];
+	if ([object isKindOfClass:[CHOrderedSet class]])
+		return [CHOrderedSet setWithSet:object];
 	if ([object isKindOfClass:[NSArray class]])
-		return [NSMutableSet setWithArray:object];
+		return [CHOrderedSet setWithArray:object];
 	else
-		return [NSMutableSet setWithObject:object];
+		return [CHOrderedSet setWithObject:object];
 }
 
 #pragma mark -
 
-@implementation CHMultiDictionary
+@implementation CHMultiOrderedDictionary
 
 - (id) initWithObjects:(NSArray*)objectsArray forKeys:(NSArray*)keyArray {
 	if ([keyArray count] != [objectsArray count])
@@ -52,26 +59,26 @@ static inline NSMutableSet* createMutableSetFromObject(id object) {
 	return [[self objectForKey:aKey] count];
 }
 
-- (NSSet*) objectsForKey:(id)aKey {
+- (CHOrderedSet*) objectsForKey:(id)aKey {
 	return [[[(id)dictionary objectForKey:aKey] copy] autorelease];
 }
 
 #pragma mark Modifying Contents
 
 - (void) addObject:(id)anObject forKey:(id)aKey {
-	NSMutableSet *objects = [self objectForKey:aKey];
+	CHOrderedSet *objects = [self objectForKey:aKey];
 	if (objects == nil)
-		[super setObject:(objects = [NSMutableSet set]) forKey:aKey];
+		[super setObject:(objects = [CHOrderedSet set]) forKey:aKey];
 	else
 		objectCount -= [objects count];
 	[objects addObject:anObject];
 	objectCount += [objects count];
 }
 
-- (void) addObjects:(NSSet*)objectSet forKey:(id)aKey {
-	NSMutableSet *objects = [self objectForKey:aKey];
+- (void) addObjects:(CHOrderedSet*)objectSet forKey:(id)aKey {
+	CHOrderedSet *objects = [self objectForKey:aKey];
 	if (objects == nil)
-		[super setObject:(objects = [NSMutableSet set]) forKey:aKey];
+		[super setObject:(objects = [CHOrderedSet set]) forKey:aKey];
 	else
 		objectCount -= [objects count];
 	[objects unionSet:objectSet];
@@ -84,7 +91,7 @@ static inline NSMutableSet* createMutableSetFromObject(id object) {
 }
 
 - (void) removeObject:(id)anObject forKey:(id)aKey {
-	NSMutableSet *objects = [self objectForKey:aKey];
+	CHOrderedSet *objects = [self objectForKey:aKey];
 	if ([objects containsObject:anObject]) {
 		[objects removeObject:anObject];
 		--objectCount;
@@ -99,31 +106,14 @@ static inline NSMutableSet* createMutableSetFromObject(id object) {
 }
 
 - (void) setObject:(id)anObject forKey:(id)aKey {
-	NSSet *objectSet = createMutableSetFromObject(anObject);
+	CHOrderedSet *objectSet = createOrderedSetFromObject(anObject);
 	if (aKey != nil)
 		objectCount += ([objectSet count] - [[self objectForKey:aKey] count]);
 	[super setObject:objectSet forKey:aKey];
 }
 
-- (void) setObjects:(NSSet*)objectSet forKey:(id)aKey {
+- (void) setObjects:(CHOrderedSet*)objectSet forKey:(id)aKey {
 	[self setObject:objectSet forKey:aKey];
 }
-
-/*	CJEC, 25-Mar-15: Added implementation 
- */
-- (NSArray *) allValues
-	{
-	NSMutableArray *	poaoValues;
-	id					poKey;
-	NSSet *				poSetValues;
-	
-	poaoValues = [NSMutableArray array];
-	for (poKey in self)
-		{
-		poSetValues = [self objectForKey: poKey];
-		[poaoValues addObjectsFromArray: [poSetValues allObjects]];
-		}
-	return poaoValues;
-	}
 
 @end

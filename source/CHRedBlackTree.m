@@ -80,11 +80,11 @@ static inline CHBinaryTreeNode* doubleRotation(CHBinaryTreeNode *node, BOOL goin
 	++mutations;
 
 	CHBinaryTreeNode *current, *parent, *grandparent, *greatgrandparent;
-	greatgrandparent = grandparent = parent = current = header;
+	grandparent = parent = current = header;
 	
 	sentinel->object = anObject;
 	NSComparisonResult comparison;
-	while (comparison = [current->object compare:anObject]) {
+	while ((comparison = [current->object compare:anObject])) {
 		greatgrandparent = grandparent, grandparent = parent, parent = current;
 		current = current->link[comparison == NSOrderedAscending];
 		

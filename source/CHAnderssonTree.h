@@ -69,6 +69,7 @@
  
  (See <a href="http://user.it.uu.se/~arnea/ps/simp.pdf">PDF original</a> or <a href="http://user.it.uu.se/~arnea/ps/simp.ps">PostScript original</a>)
  */
-@interface CHAnderssonTree : CHAbstractBinarySearchTree
-
+@interface CHAnderssonTree : CHBinarySearchTree
+	{
+	}
 @end

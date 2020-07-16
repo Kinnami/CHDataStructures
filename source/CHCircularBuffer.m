@@ -229,6 +229,8 @@ do { \
                                    objects:(id*)stackbuf
                                      count:(NSUInteger)len
 {
+	(void) stackbuf;				/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
+	(void) len;						/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	if (state->state == 0) {
 		state->mutationsPtr = &mutations;
 		state->itemsPtr = array + headIndex; // pointer arithmetic for offset
@@ -468,6 +470,7 @@ do { \
 - (void) removeObject:(id)anObject withEqualityTest:(BOOL(*)(id,id))objectsMatch {
 	if (count == 0 || anObject == nil)
 		return;
+	[anObject retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
 	// Strip off leading matches if any exist in the buffer.
 	while (headIndex != tailIndex && objectsMatch(array[headIndex], anObject)) {
 		[array[headIndex] release];
@@ -507,6 +510,7 @@ do { \
 	}
 	count = (tailIndex + arrayCapacity - headIndex) % arrayCapacity;
 	++mutations;
+	[anObject release];			/* CJEC, 27-May-15: Safe to deallocate now */
 }
 
 - (void) removeObject:(id)anObject {

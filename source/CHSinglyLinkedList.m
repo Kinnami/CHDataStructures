@@ -442,6 +442,7 @@ static size_t kCHSinglyLinkedListNodeSize = sizeof(CHSinglyLinkedListNode);
 - (void) removeObject:(id)anObject withEqualityTest:(BOOL(*)(id,id))objectsMatch {
 	if (count == 0 || anObject == nil)
 		return;
+	[anObject retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
 	CHSinglyLinkedListNode *node = head;
 	do {
 		while (node->next != NULL && !objectsMatch(node->next->object, anObject))
@@ -453,6 +454,7 @@ static size_t kCHSinglyLinkedListNodeSize = sizeof(CHSinglyLinkedListNode);
 	} while (node->next != NULL);
 	tail = node;
 	++mutations;
+	[anObject release];			/* CJEC, 27-May-15: Safe to deallocate now */
 }
 
 - (void) removeObject:(id)anObject {

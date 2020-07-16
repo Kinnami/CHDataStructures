@@ -24,7 +24,7 @@
 	CHBinaryTreeNode *parent = header, *current = header->right;
 	sentinel->object = anObject; // Assure that we find a spot to insert
 	NSComparisonResult comparison;
-	while (comparison = [current->object compare:anObject]) {
+	while ((comparison = [current->object compare:anObject])) {
 		parent = current;
 		current = current->link[comparison == NSOrderedAscending]; // R on YES
 	}
@@ -58,7 +58,7 @@
 	
 	sentinel->object = anObject; // Assure that we find a spot to insert
 	NSComparisonResult comparison;
-	while (comparison = [current->object compare:anObject]) {
+	while ((comparison = [current->object compare:anObject])) {
 		parent = current;
 		current = current->link[comparison == NSOrderedAscending]; // R on YES
 	}

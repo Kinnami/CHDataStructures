@@ -43,6 +43,7 @@
  
  @see anyObject
  @see objectEnumerator
+ @see reverseObjectEnumerator
  */
 - (NSArray*) allObjects;
 
@@ -117,6 +118,20 @@
  @see allObjects
  */
 - (NSEnumerator*) objectEnumerator;
+
+/**
+ Returns an enumerator object that lets you access each object in the receiver by reverse insertion order.
+ 
+ @return An enumerator object that lets you access each object in the receiver by reverse insertion order.
+ 
+ @warning Modifying a collection while it is being enumerated is unsafe, and may cause a mutation exception to be raised.
+ 
+ If you need to modify the entries concurrently, you can enumerate over a "snapshot" of the set's values obtained from #allObjects.
+ 
+ @see allObjects
+ */
+- (NSEnumerator*) reverseObjectEnumerator;	/* CJEC, 15-Oct-14: Add missing reverse enumerator method */
+
 
 /**
  Returns an array containing the objects in the receiver at the indexes specified by a given index set.

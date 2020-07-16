@@ -11,6 +11,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <CoreServices/CoreServices.h>
 
 // Protocols
 #import "CHDeque.h"
@@ -35,6 +36,7 @@
 #import "CHListQueue.h"
 #import "CHListStack.h"
 #import "CHMultiDictionary.h"
+#import "CHMultiOrderedDictionary.h"
 #import "CHMutableArrayHeap.h"
 #import "CHOrderedDictionary.h"
 #import "CHOrderedSet.h"
@@ -80,6 +82,7 @@
  - CHMutableDictionary
 	 - CHBidirectionalDictionary
 	 - CHMultiDictionary
+	 - CHMultiOrderedDictionary
 	 - CHOrderedDictionary
 	 - CHSortedDictionary
  

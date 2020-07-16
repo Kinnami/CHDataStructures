@@ -13,10 +13,12 @@
 #import "CHMutableSet.h"
 
 const void* CHMutableSetRetain(CFAllocatorRef allocator, const void *value) {
+	(void) allocator;				/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	return [(id)value retain];
 }
 
 void CHMutableSetRelease(CFAllocatorRef allocator, const void *value) {
+	(void) allocator;				/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	[(id)value release];
 }
 

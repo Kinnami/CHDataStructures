@@ -15,10 +15,12 @@
 #pragma mark CFBinaryHeap callbacks
 
 const void* CHBinaryHeapRetain (CFAllocatorRef allocator, const void *value) {
+	(void) allocator;				/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	return [(id)value retain];
 }
 
 void CHBinaryHeapRelease (CFAllocatorRef allocator, const void *value) {
+	(void) allocator;				/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	[(id)value release];
 }
 
@@ -27,10 +29,12 @@ CFStringRef CHBinaryHeapDescription (const void *value) {
 }
 
 CFComparisonResult CHBinaryHeapCompareAscending (const void *value1, const void *value2, void *info) {
+	(void) info;					/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	return [(id)value1 compare:(id)value2];
 }
 
 CFComparisonResult CHBinaryHeapCompareDescending (const void *value1, const void *value2, void *info) {
+	(void) info;					/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	return [(id)value1 compare:(id)value2] * -1;
 }
 
@@ -187,6 +191,7 @@ static const CFBinaryHeapCallBacks kCHBinaryHeapCallBacksDescending = {
 #pragma mark <NSCopying>
 
 - (id) copyWithZone:(NSZone*) zone {
+	(void) zone;					/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	return [[CHBinaryHeap alloc] initWithArray:[self allObjects]];
 }
 

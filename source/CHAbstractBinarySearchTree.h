@@ -63,20 +63,77 @@ typedef struct CHBinaryTreeNode {
 } CHBinaryTreeNode;
 // NOTE: If the compiler issues "Declaration does not declare anthing" warnings for this struct, change the C Language Dialect in your Xcode build settings to GNU99; anonymous structs and unions are not properly supported by the C99 standard.
 
+@protocol CHAbstractBinarySearchTreeP				/* Declares the primitive methods in CHAbstractBinarySearchTree that must be implemented in derived classes */
+
+- (unsigned int)		GetOptions;
+- (void) 				encodeWithCoder: (NSCoder *) a_poCoder;
+- (NSUInteger)			countByEnumeratingWithState: (NSFastEnumerationState *) a_pFastEnumerationState objects: (id *) a_ppoStack count: (NSUInteger) a_cObjects;
+- (id) 					anyObject;
+- (NSUInteger)			count;
+- (id)					firstObject;
+- (id)					lastObject;
+- (id)					member: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel options: (unsigned int) a_fuiOptions;
+- (NSEnumerator *)		objectEnumeratorWithTraversalOrder: (CHTraversalOrder) a_eTraversalOrder options: (unsigned int) a_fuiOptions;
+- (void) 				removeAllObjects;
+- (id <CHSortedSet>)	subsetFromObject: (id) a_poStart toObject: (id) a_poEnd options: (CHSubsetConstructionOptions) a_fuiSubsetConstructionOptions nestingLevel: (unsigned int) a_uiNestingLevel;
+
+@end
+
+@protocol CHBinarySearchTreeP <CHAbstractBinarySearchTreeP>				/* Declares the primitive methods in CHBinarySearchTree that must be implemented in derived classes */
+
+- (void)				addObject:(id) a_po nestingLevel: (unsigned int) a_uiNestingLevel;
+- (void) 				removeObject: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel;
+
+@end
+
+/* CJEC, 12-Feb-15: TODO: Complete the conversion to a class cluster */
 /**
- An abstract CHSearchTree with many default method implementations. Methods for search, size, and enumeration are implemented in this class, as are methods for NSCoding, NSCopying, and NSFastEnumeration. (This works since all child classes use the CHBinaryTreeNode struct.) Any subclass @b must implement \link #addObject: -addObject:\endlink and \link #removeObject: -removeObject:\endlink according to the inner workings of that specific tree.
+ An abstract CHSearchTree specifying methods for search, size, and enumeration are declared in this class, as are methods for NSCoding, NSCopying, and NSFastEnumeration. This base class could be used to construct a class cluster that would allow automatic selection of the appropriate concrete class. It also provides a base class from which other classes can be derived to extend the capabilities of all the derived classes.
+ 
+ Rather than enforcing that this class be abstract, the contract is implied. If this class were actually instantiated, it would be of little use since there is attempts to insert or remove will result in runtime exceptions being raised.
+*/
+ 
+@interface CHAbstractBinarySearchTree : NSObject <CHSearchTree, CHMultiLevelTreeP>	/* CJEC, 12-Feb-15: Separated CHAbstractBinarySearchTree into a genuine abstract base class and CHBinaryTree, the abstract implementation class for all binary search trees */
+{
+	@protected
+		CHBinaryTreeNode *	header;			// Dummy header; no more checks for root.
+		CHBinaryTreeNode *	sentinel;		// Dummy leaf; no more checks for NULL.
+		NSUInteger			count;			// The number of objects currently in the tree.
+		unsigned long		mutations; 		// Tracks mutations for NSFastEnumeration.
+		unsigned int		m_fuiOptions;	/* CJEC, 1-Jul-13: Options == 0 behaves like original code. One or more of CHTreeOptions */
+}
+
++ (SEL)					SelCompare: (unsigned int) a_uiNestingLevel;	/* CJEC, 22-Jul-13: Depending on the nesting level, return the appropriate comparison selector */
++ (NSInvocation *)		InvocationCompare: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel;	/* CJEC, 8-Jul-13: Support multi-level trees. Provide a different comparison method for each nesting level */
+- (NSComparisonResult)	Compare: (NSInvocation *) a_poInvocationCompare target: (id) a_poTarget argument: (id) a_poArgument;	/* CJEC, 10-Jul-13: Support multi-level trees. Provide a comparison method using the comparison invocation */
+- (id)					newLeafCollection: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel returnsIsMultiLevel: (bool *) a_pfMultiLevel;	/* CJEC, 19-Jul-13: Support multiple objects all ordered NSOrderedSame at the same leaf. Note: Conforms to Foundation's naming conventions. The caller MUST release */
+
+@end
+
+/**
+ An abstract CHAbstractBinarySearchTree with many default method implementations. Methods for search, size, and enumeration are implemented in this class, as are methods for NSCoding, NSCopying, and NSFastEnumeration. (This works since all child classes use the CHBinaryTreeNode struct.) Any subclass @b must implement \link #addObject: -addObject:\endlink and \link #removeObject: -removeObject:\endlink according to the inner workings of that specific tree.
  
  Rather than enforcing that this class be abstract, the contract is implied. If this class were actually instantiated, it would be of little use since there is attempts to insert or remove will result in runtime exceptions being raised.
  
  Much of the code and algorithms was distilled from information in the <a href="http://eternallyconfuzzled.com/tuts/datastructures/jsw_tut_bst1.aspx">Binary Search Trees tutorial</a>, which is in the public domain courtesy of <a href="http://eternallyconfuzzled.com/">Julienne Walker</a>. Method names have been changed to match the APIs of existing Cocoa collections provided by Apple.
- */
-@interface CHAbstractBinarySearchTree : NSObject <CHSearchTree>
-{
-	CHBinaryTreeNode *header; // Dummy header; no more checks for root.
-	CHBinaryTreeNode *sentinel; // Dummy leaf; no more checks for NULL.
-	NSUInteger count; // The number of objects currently in the tree.
-	unsigned long mutations; // Tracks mutations for NSFastEnumeration.
-}
+
+ The original implementation provided by Quinn Taylor supported a single item at each tree node. Christopher James Elphinstone Chandler extended this implementation to 
+ provide multiple items at each node. These are either grouped together in a NSMutableSet or each node becomes another sorted tree with the same concrete tree class
+ and using a new comparison method.
+ The outer most tree always uses @b compare: as usual. Inner trees use @b compare1: @b compare2: and so on. This behaviour is controlled by the tree's options.
+
+ When options are 0, the enhanced code behaves like the original. The options are a bitarray of flags:
+
+ @b CHTreeOptionsMultiLevel = 0x01. CJEC, 2-Jul-13: Support multi-level trees
+
+ @b CHTreeOptionsMultiLeaves = 0x02. CJEC, 19-Jul-13: Support NSMutableSet leaves, allowing multiple items with NSOrderedSame in the parent tree
+
+ Both option flags can be used together as the class library will not use CHTreeOptionsMultiLevel if there is no appropriate comparison method
+*/
+ 
+@interface CHBinarySearchTree : CHAbstractBinarySearchTree <CHAbstractBinarySearchTreeP>	/* CJEC, 12-Feb-15: Separated CHAbstractBinarySearchTree into a genuine abstract base class and CHBinaryTree, the abstract implementation class for all binary search trees */
+	{
+	}
 
 /**
  Produces a representation of the receiver that can be useful for debugging.
@@ -100,6 +157,7 @@ typedef struct CHBinaryTreeNode {
  
  @see debugDescription
  */
+
 - (NSString*) dotGraphString;
 
 @end

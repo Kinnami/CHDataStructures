@@ -26,7 +26,9 @@ typedef enum {
 	/** Indicates that a subset should exclude the low endpoint if it is not nil. */
 	CHSubsetExcludeLowEndpoint  = 1 << 0,
 	/** Indicates that a subset should exclude the high endpoint if it is not nil. */
-	CHSubsetExcludeHighEndpoint = 1 << 1
+	CHSubsetExcludeHighEndpoint = 1 << 1,
+	/** CJEC, 18-Jul-13: Support multi-level trees. Indicates multi-level trees should be treated as a single-level tree with collections as leaves. */
+	CHSubsetForceSingleLevel = 1 << 2
 } CHSubsetConstructionOptions;
 
 /**

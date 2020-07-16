@@ -42,6 +42,8 @@
  G. M. Adelson-Velsky and E. M. Landis. "An algorithm for the organization of information." <em>Proceedings of the USSR Academy of Sciences</em>, 146:263-266, 1962. (English translation in <em>Soviet Mathematics</em>, 3:1259-1263, 1962.)
  </div>
  */
-@interface CHAVLTree : CHAbstractBinarySearchTree
+@interface CHAVLTree : CHBinarySearchTree
+	{
+	}
 
 @end

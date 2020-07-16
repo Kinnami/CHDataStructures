@@ -32,6 +32,11 @@ typedef enum {
 
 #define isValidTraversalOrder(o) (o>=CHTraverseAscending && o<=CHTraverseLevelOrder)
 
+typedef enum {
+	CHTreeOptionsMultiLevel		= 0x01,		// CJEC, 2-Jul-13: Support multi-level trees
+	CHTreeOptionsMultiLeaves	= 0x02		// CJEC, 19-Jul-13: Support NSMutable Sets as leaves, allowing multiple items with NSOrderedSame
+} CHTreeOptions;							// CJEC, 22-Jul-13: Note: Both flags can be used together as the class library will not use CHTreeOptionsMultiLevel if there is not appropriate comparison method
+
 /**
  A protocol which specifes an interface for search trees, such as standard <a href="http://en.wikipedia.org/wiki/Binary_search_tree">binary trees</a>, <a href="http://en.wikipedia.org/wiki/B-tree">B-trees</a>, N-ary trees, or any similar tree-like structure. This protocol extends the CHSortedSet protocol with two additional methods (\link #allObjectsWithTraversalOrder:\endlink and \link #objectEnumeratorWithTraversalOrder:\endlink) specific to search tree implementations of a sorted set.
  
@@ -106,8 +111,16 @@ typedef enum {
 /**
  Returns an enumerator that accesses each object using a given traversal order.
  
- @param order The order in which an enumerator should traverse nodes in the tree. @return An enumerator that accesses each object in the tree in a given order. The enumerator returned is never @c nil; if the tree is empty, the enumerator will always return @c nil for \link NSEnumerator#nextObject -nextObject\endlink and an empty array for \link NSEnumerator#allObjects -allObjects\endlink.
+ @param order The order in which an enumerator should traverse nodes in the tree.
  
+ @param a_fuiOptions The multi-level tree search options to support trees of trees. When options are 0, the enhanced code behaves like the original. The options are a bitarray of flags: 
+					CHTreeOptionsMultiLevel		= 0x01,		// CJEC, 2-Jul-13: Support multi-level trees
+					CHTreeOptionsMultiLeaves	= 0x02		// CJEC, 19-Jul-13: Support NSMutable Sets as leaves, allowing multiple items with NSOrderedSame
+
+ @return An enumerator that accesses each object in the tree in a given order. The enumerator returned is never @c nil; if the tree is empty, the enumerator will always return @c nil for \link NSEnumerator#nextObject -nextObject\endlink and an empty array for \link NSEnumerator#allObjects -allObjects\endlink.
+
+ @attention Both option flags can be used together as the class library will not use CHTreeOptionsMultiLevel if there is no appropriate comparison method
+
  @attention The enumerator retains the collection. Once all objects in the enumerator have been consumed, the collection is released.
  @warning Modifying a collection while it is being enumerated is unsafe, and may cause a mutation exception to be raised.
  
@@ -115,7 +128,19 @@ typedef enum {
  @see \link objectEnumerator - objectEnumerator\endlink
  @see \link reverseObjectEnumerator - reverseObjectEnumerator\endlink
  */
-- (NSEnumerator*) objectEnumeratorWithTraversalOrder:(CHTraversalOrder)order;
+- (NSEnumerator*) objectEnumeratorWithTraversalOrder:(CHTraversalOrder)order options: (unsigned int) a_fuiOptions;	/* CJEC, 18-Jul-13: Support multi-level trees */
 
 // @}
+@end
+
+/* CJEC, 23-Jul-13: Declare a new protocol for multi-level tree support, allowing the use of -[NSObject conformToProtocol:] rather than -[NSObject respondsToSelector:] */
+@protocol  CHMultiLevelTreeP <CHSearchTree>
+
+- (id)		initWithOptions: (unsigned int) a_fuiOptions;	/* CJEC, 1-Jul-13: Support multi-level trees. New designated initialiser. init calls this with options == 0 */
++ (Class)	ClassCollectionDefault;							/* CJEC, 19-Jul-13: Support multiple objects all ordered NSOrderedSame at the same leaf. Default class used with CHTreeOptionsMultiLeaves collections */
+
+- (void)	addObject: (id) a_po nestingLevel: (unsigned int) a_fuiNestingLevel;	/* CJEC, 8-Jul-13: Support multi-level trees. Overridden in concrete class */
+- (void)	removeObject: (id) a_po nestingLevel: (unsigned int) a_fuiNestingLevel;	/* CJEC, 8-Jul-13: Support multi-level trees. Overridden in concrete class */
+- (id)		member: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel options: (unsigned int) a_fuiOptions;	/* CJEC, 2-Jul-13: Support multi-level collections by using a different compare*: method for each nesting level */
+
 @end

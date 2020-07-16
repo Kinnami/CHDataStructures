@@ -134,16 +134,22 @@
 }
 
 - (void) removeObjectForKey:(id)aKey {
+	[aKey retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
 	if (CFDictionaryContainsKey(dictionary, aKey)) {
 		[super removeObjectForKey:aKey];
 		[keyOrdering removeObject:aKey];
 	}
+	[aKey release];			/* CJEC, 27-May-15: Safe to deallocate now */
 }
 
 - (void) removeObjectForKeyAtIndex:(NSUInteger)index {
+	id		aKey;
 	// Note: -keyAtIndex: will raise an exception if the index is invalid.
-	[super removeObjectForKey:[self keyAtIndex:index]];
+	aKey = [self keyAtIndex:index];
+	[aKey retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
+	[super removeObjectForKey: aKey];
 	[keyOrdering removeObjectAtIndex:index];
+	[aKey release];			/* CJEC, 27-May-15: Safe to deallocate now */
 }
 
 - (void) removeObjectsForKeysAtIndexes:(NSIndexSet*)indexes {

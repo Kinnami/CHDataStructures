@@ -39,8 +39,8 @@
 @implementation CHAnderssonTree
 
 // NOTE: The header and sentinel nodes are initialized to level 0 by default.
-
-- (void) addObject:(id)anObject {
+/* CJEC, 8-Jul-13: Support multi-level trees */
+- (void) addObject:(id)anObject nestingLevel: (unsigned int) a_uiNestingLevel {
 	if (anObject == nil)
 		CHNilArgumentException([self class], _cmd);
 	++mutations;
@@ -49,21 +49,67 @@
 	CHBinaryTreeStack_DECLARE();
 	CHBinaryTreeStack_INIT();
 	
-	sentinel->object = anObject; // Assure that we find a spot to insert
-	NSComparisonResult comparison;
-	while (comparison = [current->object compare:anObject]) {
+	sentinel ->object = anObject; // Assure that we find a spot to insert
+
+	NSComparisonResult	comparison;
+	NSInvocation *		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: a_uiNestingLevel];	/* Note: Technically, we should use the other object as we're sending the compare*: method to it. But compare*: must be symmetric so we use the (non-nil) argument because we already have it */
+
+	comparison = [self Compare: poInvocationCompare target: current -> object argument: anObject];
+	while (comparison != NSOrderedSame) {
 		CHBinaryTreeStack_PUSH(current);
 		current = current->link[comparison == NSOrderedAscending]; // R on YES
+		comparison = [self Compare: poInvocationCompare target: current -> object argument: nil];	/* Note: Argument hasn't changed so don't need to set it */
 	}
 	
-	[anObject retain]; // Must retain whether replacing value or adding new node
 	if (current != sentinel) {
-		// Replace the existing object with the new object.
-		[current->object release];
-		current->object = anObject;
+		if (m_fuiOptions & (CHTreeOptionsMultiLevel | CHTreeOptionsMultiLeaves))	/* Multi-level or multiple leaf collections allowed? */
+			{
+			if ([current -> object conformsToProtocol: @protocol (CHMultiLevelTreeP)])
+				[current -> object addObject: anObject nestingLevel: a_uiNestingLevel + 1];	/* Support multi-level collections */
+			else
+				if ([current -> object respondsToSelector: @selector (addObject:)])
+					[current -> object addObject: anObject];	/* Support other collections that support the addObject: method */
+				else									/* Object is not a collection that supports addObject: */
+					{
+					id			po;
+					bool		fMultiLevel;
+					
+					po = current -> object;
+					current -> object = [self newLeafCollection: po nestingLevel: a_uiNestingLevel + 1 returnsIsMultiLevel: &fMultiLevel];	/* Replace the single leaf object with a new collection */
+					if (current -> object == nil)		/* No multi-level collection nor multiple leaves */
+						{								/* Same as original behaviour */
+						[anObject retain];	// Must retain whether replacing value or adding new node
+						// Replace the existing object with the new object.
+						[current -> object release];
+						current -> object = anObject;
+						}
+					else								/* We have a new sub-collection */
+						{
+						if (fMultiLevel)				/* Multi-level collection? Must conform to the extended addobject: nestingLevel: method */
+							{
+							[current -> object addObject: po nestingLevel: a_uiNestingLevel + 1];	/* Add the object that was the leaf object to the sub-collection */
+							[current -> object addObject: anObject nestingLevel: a_uiNestingLevel + 1];	/* Now add the new object to the sub-collection */
+							}
+						else							/* Multiple leaves. Must conform to addObject: method */
+							{
+							[current -> object addObject: po];	/* Add the object that was the leaf object to the sub-collection */
+							[current -> object addObject: anObject];	/* Now add the new object to the sub-collection */
+							}
+						[po release];					/* Release the original leaf as it has now been added to (and retained by) the sub-collection */
+						}
+					}
+			}
+		else						/* No multi-level collection nor multiple leaves allowed */
+			{
+			[anObject retain]; // Must retain whether replacing value or adding new node
+			// Replace the existing object with the new object.
+			[current->object release];
+			current->object = anObject;
+			}
 		// No need to rebalance up the path since we didn't modify the structure
 		goto done;
 	} else {
+		[anObject retain]; // Must retain whether replacing value or adding new node
 		current = CHCreateBinaryTreeNodeWithObject(anObject);
 		current->left   = sentinel;
 		current->right  = sentinel;
@@ -72,7 +118,7 @@
 		// Link from parent as the proper child, based on last comparison
 		parent = CHBinaryTreeStack_POP();
 		NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
-		comparison = [parent->object compare:anObject];
+		comparison = [self Compare: poInvocationCompare target: parent -> object argument: nil];	/* Note: Argument hasn't changed so don't need to set it */
 		parent->link[comparison == NSOrderedAscending] = current; // R if YES
 	}
 	
@@ -91,7 +137,8 @@ done:
 	CHBinaryTreeStack_FREE(stack);
 }
 
-- (void) removeObject:(id)anObject {
+/* CJEC, 8-Jul-13: Support multi-level trees */
+- (void) removeObject:(id)anObject nestingLevel: (unsigned int) a_uiNestingLevel {
 	if (count == 0 || anObject == nil)
 		return;
 	++mutations;
@@ -100,17 +147,40 @@ done:
 	CHBinaryTreeStack_DECLARE();
 	CHBinaryTreeStack_INIT();
 	
-	sentinel->object = anObject; // Assure that we stop at a leaf if not found.
-	NSComparisonResult comparison;
-	while (comparison = [current->object compare:anObject]) {
+	sentinel ->object = anObject; // Assure that we stop at a leaf if not found.
+
+	NSComparisonResult	comparison;
+	NSInvocation *		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: a_uiNestingLevel];	/* Note: Technically, we should use the other object as we're sending the compare*: method to it. But compare*: must be symmetric so we use the (non-nil) argument because we already have it */
+
+	comparison = [self Compare: poInvocationCompare target: current -> object argument: anObject];
+	while (comparison != NSOrderedSame) {
 		CHBinaryTreeStack_PUSH(current);
 		current = current->link[comparison == NSOrderedAscending]; // R on YES
+		comparison = [self Compare: poInvocationCompare target: current -> object argument: nil];	/* Note: Argument hasn't changed so don't need to set it */
 	}
+
 	// Exit if the specified node was not found in the tree.
 	if (current == sentinel) {
 		goto done;
 	}
 	
+	if (m_fuiOptions & (CHTreeOptionsMultiLevel | CHTreeOptionsMultiLeaves))	/* CJEC, 19-Jul-13: Support multi-level trees and multiple leaves */
+		{
+		if ([current -> object conformsToProtocol: @protocol (CHMultiLevelTreeP)])
+			{
+			[current-> object removeObject: anObject nestingLevel: a_uiNestingLevel + 1];	/* Support multi-level collections */
+			if ([current -> object count] > 0)		/* Still objects in the subcollection? Nothing more to do, and no rebalancing necessary */
+				goto done;
+			}
+		else
+			if ([current -> object respondsToSelector: @selector (removeObject:)])
+				{
+				[current -> object removeObject: anObject];	/* Support other collections that support the removeObject: method */
+				if ([current -> object count] > 0)	/* Still objects in the subcollection? Nothing more to do, and no rebalancing necessary */
+					goto done;
+				}									/* Otherwise, object is not a collection that supports object removal or no more objects in the sub-collection, so fall through to the standard removal code, and rebalance the tree */
+		}
+
 	[current->object release]; // Object must be released in any case
 	--count;
 	if (current->left == sentinel || current->right == sentinel) {

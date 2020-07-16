@@ -240,6 +240,8 @@
 }
 
 - (void)insertObject:(id)anObject atIndex:(NSUInteger)index {
+	(void) anObject;				/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
+	(void) index;					/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	CHUnsupportedOperationException([self class], _cmd);
 }
 
@@ -274,6 +276,7 @@
 }
 
 - (void) removeObjectAtIndex:(NSUInteger)index {
+	(void) index;					/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	CHUnsupportedOperationException([self class], _cmd);
 }
 

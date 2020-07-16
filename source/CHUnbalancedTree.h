@@ -23,6 +23,7 @@
  
  Even though the tree is not balanced when items are added or removed, access is <b>at worst</b> linear if the tree essentially degenerates into a linked list. This class is fast, and without stack risk because it works without recursion.
  */
-@interface CHUnbalancedTree : CHAbstractBinarySearchTree
-
+@interface CHUnbalancedTree : CHBinarySearchTree
+	{
+	}
 @end

@@ -55,9 +55,9 @@
  <div style="margin: 0 25px; font-weight: bold;">
  L. J. Guibas and R. Sedgewick. "A dichromatic framework for balanced trees."
  <em>19th Annual Symposium on Foundations of Computer Science</em>, pp.8-21,
- 1978. (<a href="http://dx.doi.org/10.1109/SFCS.1978.3">DOI link to IEEE</a>)
- </div>
+ 1978.</div> (<a href="http://dx.doi.org/10.1109/SFCS.1978.3">DOI link to IEEE</a>)
  */
-@interface CHRedBlackTree : CHAbstractBinarySearchTree
-
+@interface CHRedBlackTree : CHBinarySearchTree
+	{
+	}
 @end

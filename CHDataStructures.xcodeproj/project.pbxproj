@@ -7,6 +7,21 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		87A6F75E24C0D10400D00AA2 /* MacAll */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 87A6F76D24C0D10400D00AA2 /* Build configuration list for PBXAggregateTarget "MacAll" */;
+			buildPhases = (
+			);
+			dependencies = (
+				87A6F75F24C0D10400D00AA2 /* PBXTargetDependency */,
+				87A6F76124C0D10400D00AA2 /* PBXTargetDependency */,
+				87A6F76724C0D10400D00AA2 /* PBXTargetDependency */,
+				87A6F76924C0D10400D00AA2 /* PBXTargetDependency */,
+				87A6F76B24C0D10400D00AA2 /* PBXTargetDependency */,
+			);
+			name = MacAll;
+			productName = All;
+		};
 		E43C87680EA3D35500B3B31E /* Deployment */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = E43C87740EA3D36600B3B31E /* Build configuration list for PBXAggregateTarget "Deployment" */;
@@ -51,6 +66,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		87A6F7D824C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */; };
+		87A6F7D924C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */; };
+		87A6F7DA24C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */; };
+		87A6F7DB24C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		969123AC1A7100120073C75A /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E4723A710EB91B7A006FE465 /* Util.m */; };
 		969123AD1A7100120073C75A /* CHAbstractBinarySearchTree.m in Sources */ = {isa = PBXBuildFile; fileRef = E4ADBC990E88412C00B570BC /* CHAbstractBinarySearchTree.m */; };
@@ -206,6 +225,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		87A6F76024C0D10400D00AA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = CHDataStructures;
+		};
+		87A6F76224C0D10400D00AA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E473CB540E9346CB005CA997;
+			remoteInfo = "Unit Testing";
+		};
+		87A6F76824C0D10400D00AA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E4FE76D80E89556A00971EE6;
+			remoteInfo = Documentation;
+		};
+		87A6F76A24C0D10400D00AA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E44B59B30E95850F00F9DD1A;
+			remoteInfo = Benchmarks;
+		};
+		87A6F76C24C0D10400D00AA2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E43C87680EA3D35500B3B31E;
+			remoteInfo = "Disk Image";
+		};
 		963818E81A7105EB0067CF59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
@@ -312,6 +366,8 @@
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHMultiOrderedDictionary.h; path = source/CHMultiOrderedDictionary.h; sourceTree = "<group>"; };
+		87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHMultiOrderedDictionary.m; path = source/CHMultiOrderedDictionary.m; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2A61A70FCB40074B77B /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2B01A70FCB50074B77B /* CHDataStructures.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHDataStructures.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -523,6 +579,8 @@
 				E4ADBB160E88174200B570BC /* CHListStack.m */,
 				E48BF92E0EE79AAE0004D5E6 /* CHMultiDictionary.h */,
 				E48BF9720EE7A2010004D5E6 /* CHMultiDictionary.m */,
+				87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */,
+				87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */,
 				E4ADBB060E88174200B570BC /* CHMutableArrayHeap.h */,
 				E4ADBB070E88174200B570BC /* CHMutableArrayHeap.m */,
 				E4558D8F0FE758C300CC5860 /* CHMutableDictionary.h */,
@@ -648,6 +706,7 @@
 				E4ADBB360E88174200B570BC /* CHQueue.h in Headers */,
 				E41180270E91E7E700E66053 /* CHSinglyLinkedList.h in Headers */,
 				E4558DB60FE7599500CC5860 /* CHSortedDictionary.h in Headers */,
+				87A6F7D824C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */,
 				E4128A970FB27E4F00CC187D /* CHSortedSet.h in Headers */,
 				E4ADBB3B0E88174200B570BC /* CHStack.h in Headers */,
 				E4558DB00FE7598700CC5860 /* CHOrderedDictionary.h in Headers */,
@@ -690,6 +749,7 @@
 				969123E41A7100480073C75A /* CHRedBlackTree.h in Headers */,
 				969123CC1A7100470073C75A /* CHSearchTree.h in Headers */,
 				969123E51A7100480073C75A /* CHSinglyLinkedList.h in Headers */,
+				87A6F7D924C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */,
 				969123E61A7100480073C75A /* CHSortedDictionary.h in Headers */,
 				969123CD1A7100470073C75A /* CHSortedSet.h in Headers */,
 				969123CE1A7100470073C75A /* CHStack.h in Headers */,
@@ -801,7 +861,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 0460;
+				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					96E5B2A51A70FCB40074B77B = {
 						CreatedOnToolsVersion = 6.2;
@@ -834,6 +894,7 @@
 				E44B59B30E95850F00F9DD1A /* Benchmarks */,
 				E43C87680EA3D35500B3B31E /* Deployment */,
 				E4FAE15B0E968F1B007BB1F9 /* All */,
+				87A6F75E24C0D10400D00AA2 /* MacAll */,
 			);
 		};
 /* End PBXProject section */
@@ -910,8 +971,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "doxygen doxygen/Doxyfile";
-			showEnvVarsInLog = 0;
+			shellScript = "/Applications/Doxygen.app/Contents/Resources/doxygen doxygen/Doxyfile";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -929,6 +989,7 @@
 				E4ADBC9A0E88412C00B570BC /* CHAbstractBinarySearchTree.m in Sources */,
 				E442DFB90E8F1E6D00BD62F6 /* CHAnderssonTree.m in Sources */,
 				E41180280E91E7E700E66053 /* CHSinglyLinkedList.m in Sources */,
+				87A6F7DA24C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m in Sources */,
 				E40D184E0E945580007F39D8 /* CHListDeque.m in Sources */,
 				E48860BB0EA66072000F132A /* CHAbstractListCollection.m in Sources */,
 				E4723A720EB91B7A006FE465 /* Util.m in Sources */,
@@ -962,6 +1023,7 @@
 				969123B31A7100120073C75A /* CHCircularBuffer.m in Sources */,
 				969123B41A7100120073C75A /* CHCircularBufferDeque.m in Sources */,
 				969123B51A7100120073C75A /* CHCircularBufferQueue.m in Sources */,
+				87A6F7DB24C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m in Sources */,
 				969123B61A7100120073C75A /* CHCircularBufferStack.m in Sources */,
 				969123B71A7100120073C75A /* CHDoublyLinkedList.m in Sources */,
 				969123B81A7100120073C75A /* CHListDeque.m in Sources */,
@@ -1029,6 +1091,31 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		87A6F75F24C0D10400D00AA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8DC2EF4F0486A6940098B216 /* Mac */;
+			targetProxy = 87A6F76024C0D10400D00AA2 /* PBXContainerItemProxy */;
+		};
+		87A6F76124C0D10400D00AA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E473CB540E9346CB005CA997 /* MacTests */;
+			targetProxy = 87A6F76224C0D10400D00AA2 /* PBXContainerItemProxy */;
+		};
+		87A6F76724C0D10400D00AA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E4FE76D80E89556A00971EE6 /* Documentation */;
+			targetProxy = 87A6F76824C0D10400D00AA2 /* PBXContainerItemProxy */;
+		};
+		87A6F76924C0D10400D00AA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E44B59B30E95850F00F9DD1A /* Benchmarks */;
+			targetProxy = 87A6F76A24C0D10400D00AA2 /* PBXContainerItemProxy */;
+		};
+		87A6F76B24C0D10400D00AA2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E43C87680EA3D35500B3B31E /* Deployment */;
+			targetProxy = 87A6F76C24C0D10400D00AA2 /* PBXContainerItemProxy */;
+		};
 		963818E91A7105EB0067CF59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 96E5B2A51A70FCB40074B77B /* iOS */;
@@ -1176,6 +1263,22 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = CHDataStructures;
+			};
+			name = Release;
+		};
+		87A6F76E24C0D10400D00AA2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				PRODUCT_NAME = "All copy";
+			};
+			name = Debug;
+		};
+		87A6F76F24C0D10400D00AA2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				PRODUCT_NAME = "All copy";
 			};
 			name = Release;
 		};
@@ -1459,6 +1562,15 @@
 			buildConfigurations = (
 				1DEB91B208733DA50010E9CD /* Debug */,
 				1DEB91B308733DA50010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		87A6F76D24C0D10400D00AA2 /* Build configuration list for PBXAggregateTarget "MacAll" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87A6F76E24C0D10400D00AA2 /* Debug */,
+				87A6F76F24C0D10400D00AA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

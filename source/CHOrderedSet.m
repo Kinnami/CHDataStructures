@@ -60,6 +60,10 @@
 	return [ordering objectAtIndex:index];
 }
 
+- (NSEnumerator*) reverseObjectEnumerator {			/* CJEC, 15-Oct-14: Add missing reverse enumerator method */
+	return [ordering reverseObjectEnumerator];
+}
+
 - (NSEnumerator*) objectEnumerator {
 	return [ordering objectEnumerator];
 }
@@ -131,13 +135,20 @@
 }
 
 - (void) removeObject:(id)anObject {
+	[anObject retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
 	[super removeObject:anObject];
 	[ordering removeObject:anObject];
+	[anObject release];			/* CJEC, 27-May-15: Safe to deallocate now */
 }
 
 - (void) removeObjectAtIndex:(NSUInteger)index {
-	[super removeObject:[ordering objectAtIndex:index]];
+	id	anObject;
+	
+	anObject = [ordering objectAtIndex:index];
+	[anObject retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
+	[super removeObject: anObject];
 	[ordering removeObjectAtIndex:index];
+	[anObject release];			/* CJEC, 27-May-15: Safe to deallocate now */
 }
 
 - (void) removeObjectsAtIndexes:(NSIndexSet*)indexes {

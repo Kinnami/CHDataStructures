@@ -49,7 +49,9 @@
  
  @todo Examine performance issues (treaps are often the slowest balanced tree).
  */
-@interface CHTreap : CHAbstractBinarySearchTree
+@interface CHTreap : CHBinarySearchTree
+	{
+	}
 
 /** Priority when an object is not found in a treap (max value for u_int32_t). */
 #define CHTreapNotFound UINT32_MAX

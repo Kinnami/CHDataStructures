@@ -396,7 +396,7 @@ static size_t kCHDoublyLinkedListNodeSize = sizeof(CHDoublyLinkedListNode);
 		CHNilArgumentException([self class], _cmd);
 	CHDoublyLinkedListNode *node = [self nodeAtIndex:index];
 	CHDoublyLinkedListNode *newNode;
-	newNode = malloc(kCHDoublyLinkedListNodeSize);
+	newNode = NSAllocateCollectable(kCHDoublyLinkedListNodeSize, NSScannedOption);
 	newNode->object = [anObject retain];
 	newNode->next = node;          // point forward to displaced node
 	newNode->prev = node->prev;    // point backward to preceding node
@@ -455,6 +455,7 @@ static size_t kCHDoublyLinkedListNodeSize = sizeof(CHDoublyLinkedListNode);
 - (void) removeObject:(id)anObject withEqualityTest:(BOOL(*)(id,id))objectsMatch {
 	if (count == 0 || anObject == nil)
 		return;
+	[anObject retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
 	tail->object = anObject;
 	CHDoublyLinkedListNode *node = head->next, *temp;
 	do {
@@ -466,6 +467,7 @@ static size_t kCHDoublyLinkedListNodeSize = sizeof(CHDoublyLinkedListNode);
 			node = temp;
 		}
 	} while (node != tail);
+	[anObject release];			/* CJEC, 27-May-15: Safe to deallocate now */
 }
 
 - (void) removeObject:(id)anObject {

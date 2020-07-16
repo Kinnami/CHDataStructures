@@ -20,7 +20,8 @@
 
 /** A struct for nodes in a CHSinglyLinkedList. */
 typedef struct CHSinglyLinkedListNode {
-	__unsafe_unretained id object; ///< The object associated with this node in the list.
+	/* Note: When using ARC enabled Objective C, we must use __unsafe_unretained, but this qualifier does not exist before LLVM 3.0 */
+	/* __unsafe_unretained */ id object; ///< The object associated with this node in the list.
 	struct CHSinglyLinkedListNode *next; ///< The next node in the list.
 } CHSinglyLinkedListNode;
 

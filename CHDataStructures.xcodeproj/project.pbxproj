@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		87A6F75E24C0D10400D00AA2 /* MacAll */ = {
+		87A6F75E24C0D10400D00AA2 /* CHDataStructuresMacAll */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 87A6F76D24C0D10400D00AA2 /* Build configuration list for PBXAggregateTarget "MacAll" */;
+			buildConfigurationList = 87A6F76D24C0D10400D00AA2 /* Build configuration list for PBXAggregateTarget "CHDataStructuresMacAll" */;
 			buildPhases = (
 			);
 			dependencies = (
@@ -19,12 +19,12 @@
 				87A6F76924C0D10400D00AA2 /* PBXTargetDependency */,
 				87A6F76B24C0D10400D00AA2 /* PBXTargetDependency */,
 			);
-			name = MacAll;
+			name = CHDataStructuresMacAll;
 			productName = All;
 		};
-		E43C87680EA3D35500B3B31E /* Deployment */ = {
+		E43C87680EA3D35500B3B31E /* CHDataStructuresDeployment */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = E43C87740EA3D36600B3B31E /* Build configuration list for PBXAggregateTarget "Deployment" */;
+			buildConfigurationList = E43C87740EA3D36600B3B31E /* Build configuration list for PBXAggregateTarget "CHDataStructuresDeployment" */;
 			buildPhases = (
 				E41E579A0F6AF8E500FDA687 /* ShellScript */,
 				E43C87670EA3D35500B3B31E /* ShellScript */,
@@ -32,12 +32,12 @@
 			dependencies = (
 				E43C876C0EA3D35C00B3B31E /* PBXTargetDependency */,
 			);
-			name = Deployment;
+			name = CHDataStructuresDeployment;
 			productName = "Disk Image";
 		};
-		E4FAE15B0E968F1B007BB1F9 /* All */ = {
+		E4FAE15B0E968F1B007BB1F9 /* CHDataStructuresAll */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = E4FAE1670E968F3F007BB1F9 /* Build configuration list for PBXAggregateTarget "All" */;
+			buildConfigurationList = E4FAE1670E968F3F007BB1F9 /* Build configuration list for PBXAggregateTarget "CHDataStructuresAll" */;
 			buildPhases = (
 			);
 			dependencies = (
@@ -49,18 +49,18 @@
 				E4FAE1650E968F20007BB1F9 /* PBXTargetDependency */,
 				E43C87A50EA3E19500B3B31E /* PBXTargetDependency */,
 			);
-			name = All;
+			name = CHDataStructuresAll;
 			productName = All;
 		};
-		E4FE76D80E89556A00971EE6 /* Documentation */ = {
+		E4FE76D80E89556A00971EE6 /* CHDataStructuresDocumentation */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = E4FE76F70E8955BB00971EE6 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildConfigurationList = E4FE76F70E8955BB00971EE6 /* Build configuration list for PBXAggregateTarget "CHDataStructuresDocumentation" */;
 			buildPhases = (
 				E4FE76D70E89556A00971EE6 /* ShellScript */,
 			);
 			dependencies = (
 			);
-			name = Documentation;
+			name = CHDataStructuresDocumentation;
 			productName = Documentation;
 		};
 /* End PBXAggregateTarget section */
@@ -368,6 +368,8 @@
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHMultiOrderedDictionary.h; path = source/CHMultiOrderedDictionary.h; sourceTree = "<group>"; };
 		87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHMultiOrderedDictionary.m; path = source/CHMultiOrderedDictionary.m; sourceTree = "<group>"; };
+		87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "AmiShare-release.xcconfig"; path = "../../Makefiles/Darwin/AmiShare-release.xcconfig"; sourceTree = "<group>"; };
+		87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AmiShare.xcconfig; path = ../../Makefiles/Darwin/AmiShare.xcconfig; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2A61A70FCB40074B77B /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2B01A70FCB50074B77B /* CHDataStructures.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHDataStructures.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -515,6 +517,8 @@
 		0867D691FE84028FC02AAC07 /* CHDataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */,
+				87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */,
 				E4BD316A0FEEE79C00A084B2 /* Framework Code */,
 				E473C9A70E933350005CA997 /* Unit Test Code */,
 				E4CFCDAD0E8FD16400B0253A /* Documentation */,
@@ -762,9 +766,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8DC2EF4F0486A6940098B216 /* Mac */ = {
+		8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "Mac" */;
+			buildConfigurationList = 1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "CHDataStructuresMacFramework" */;
 			buildPhases = (
 				8DC2EF500486A6940098B216 /* Headers */,
 				8DC2EF520486A6940098B216 /* Resources */,
@@ -777,15 +781,15 @@
 			);
 			dependencies = (
 			);
-			name = Mac;
+			name = CHDataStructuresMacFramework;
 			productInstallPath = "$(HOME)/Library/Frameworks";
 			productName = CHDataStructures;
 			productReference = 8DC2EF5B0486A6940098B216 /* CHDataStructures.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		96E5B2A51A70FCB40074B77B /* iOS */ = {
+		96E5B2A51A70FCB40074B77B /* CHDataStructuresiOSFramework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96E5B2BF1A70FCB50074B77B /* Build configuration list for PBXNativeTarget "iOS" */;
+			buildConfigurationList = 96E5B2BF1A70FCB50074B77B /* Build configuration list for PBXNativeTarget "CHDataStructuresiOSFramework" */;
 			buildPhases = (
 				96E5B2A31A70FCB40074B77B /* Headers */,
 				96E5B2A11A70FCB40074B77B /* Sources */,
@@ -796,14 +800,14 @@
 			);
 			dependencies = (
 			);
-			name = iOS;
+			name = CHDataStructuresiOSFramework;
 			productName = iOS;
 			productReference = 96E5B2A61A70FCB40074B77B /* CHDataStructures.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		96E5B2AF1A70FCB50074B77B /* iOSTests */ = {
+		96E5B2AF1A70FCB50074B77B /* CHDataStructuresiOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96E5B2C01A70FCB50074B77B /* Build configuration list for PBXNativeTarget "iOSTests" */;
+			buildConfigurationList = 96E5B2C01A70FCB50074B77B /* Build configuration list for PBXNativeTarget "CHDataStructuresiOSTests" */;
 			buildPhases = (
 				96E5B2AC1A70FCB50074B77B /* Sources */,
 				96E5B2AD1A70FCB50074B77B /* Frameworks */,
@@ -814,14 +818,14 @@
 			dependencies = (
 				96E5B2B31A70FCB50074B77B /* PBXTargetDependency */,
 			);
-			name = iOSTests;
+			name = CHDataStructuresiOSTests;
 			productName = iOSTests;
 			productReference = 96E5B2B01A70FCB50074B77B /* CHDataStructures.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E44B59B30E95850F00F9DD1A /* Benchmarks */ = {
+		E44B59B30E95850F00F9DD1A /* CHDataStructuresBenchmarks */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E44B59CB0E95853300F9DD1A /* Build configuration list for PBXNativeTarget "Benchmarks" */;
+			buildConfigurationList = E44B59CB0E95853300F9DD1A /* Build configuration list for PBXNativeTarget "CHDataStructuresBenchmarks" */;
 			buildPhases = (
 				E44B59B10E95850F00F9DD1A /* Sources */,
 				E44B59B20E95850F00F9DD1A /* Frameworks */,
@@ -831,14 +835,14 @@
 			dependencies = (
 				E428B52F0EA537D9007CB324 /* PBXTargetDependency */,
 			);
-			name = Benchmarks;
+			name = CHDataStructuresBenchmarks;
 			productName = Benchmarks;
 			productReference = E44B59B40E95850F00F9DD1A /* Benchmarks */;
 			productType = "com.apple.product-type.tool";
 		};
-		E473CB540E9346CB005CA997 /* MacTests */ = {
+		E473CB540E9346CB005CA997 /* CHDataStructuresMacTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E473CB690E9346F3005CA997 /* Build configuration list for PBXNativeTarget "MacTests" */;
+			buildConfigurationList = E473CB690E9346F3005CA997 /* Build configuration list for PBXNativeTarget "CHDataStructuresMacTests" */;
 			buildPhases = (
 				E473CB500E9346CB005CA997 /* Resources */,
 				E473CB510E9346CB005CA997 /* Sources */,
@@ -849,7 +853,7 @@
 			dependencies = (
 				E4A721AA0EA7AEFB00E0AC21 /* PBXTargetDependency */,
 			);
-			name = MacTests;
+			name = CHDataStructuresMacTests;
 			productName = "Unit Testing";
 			productReference = E473CB550E9346CB005CA997 /* CHDataStructures.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -886,15 +890,15 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8DC2EF4F0486A6940098B216 /* Mac */,
-				E473CB540E9346CB005CA997 /* MacTests */,
-				96E5B2A51A70FCB40074B77B /* iOS */,
-				96E5B2AF1A70FCB50074B77B /* iOSTests */,
-				E4FE76D80E89556A00971EE6 /* Documentation */,
-				E44B59B30E95850F00F9DD1A /* Benchmarks */,
-				E43C87680EA3D35500B3B31E /* Deployment */,
-				E4FAE15B0E968F1B007BB1F9 /* All */,
-				87A6F75E24C0D10400D00AA2 /* MacAll */,
+				8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */,
+				E473CB540E9346CB005CA997 /* CHDataStructuresMacTests */,
+				96E5B2A51A70FCB40074B77B /* CHDataStructuresiOSFramework */,
+				96E5B2AF1A70FCB50074B77B /* CHDataStructuresiOSTests */,
+				E4FE76D80E89556A00971EE6 /* CHDataStructuresDocumentation */,
+				E44B59B30E95850F00F9DD1A /* CHDataStructuresBenchmarks */,
+				E43C87680EA3D35500B3B31E /* CHDataStructuresDeployment */,
+				E4FAE15B0E968F1B007BB1F9 /* CHDataStructuresAll */,
+				87A6F75E24C0D10400D00AA2 /* CHDataStructuresMacAll */,
 			);
 		};
 /* End PBXProject section */
@@ -1093,82 +1097,82 @@
 /* Begin PBXTargetDependency section */
 		87A6F75F24C0D10400D00AA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8DC2EF4F0486A6940098B216 /* Mac */;
+			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
 			targetProxy = 87A6F76024C0D10400D00AA2 /* PBXContainerItemProxy */;
 		};
 		87A6F76124C0D10400D00AA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E473CB540E9346CB005CA997 /* MacTests */;
+			target = E473CB540E9346CB005CA997 /* CHDataStructuresMacTests */;
 			targetProxy = 87A6F76224C0D10400D00AA2 /* PBXContainerItemProxy */;
 		};
 		87A6F76724C0D10400D00AA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E4FE76D80E89556A00971EE6 /* Documentation */;
+			target = E4FE76D80E89556A00971EE6 /* CHDataStructuresDocumentation */;
 			targetProxy = 87A6F76824C0D10400D00AA2 /* PBXContainerItemProxy */;
 		};
 		87A6F76924C0D10400D00AA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E44B59B30E95850F00F9DD1A /* Benchmarks */;
+			target = E44B59B30E95850F00F9DD1A /* CHDataStructuresBenchmarks */;
 			targetProxy = 87A6F76A24C0D10400D00AA2 /* PBXContainerItemProxy */;
 		};
 		87A6F76B24C0D10400D00AA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E43C87680EA3D35500B3B31E /* Deployment */;
+			target = E43C87680EA3D35500B3B31E /* CHDataStructuresDeployment */;
 			targetProxy = 87A6F76C24C0D10400D00AA2 /* PBXContainerItemProxy */;
 		};
 		963818E91A7105EB0067CF59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96E5B2A51A70FCB40074B77B /* iOS */;
+			target = 96E5B2A51A70FCB40074B77B /* CHDataStructuresiOSFramework */;
 			targetProxy = 963818E81A7105EB0067CF59 /* PBXContainerItemProxy */;
 		};
 		963818EB1A7105EB0067CF59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96E5B2AF1A70FCB50074B77B /* iOSTests */;
+			target = 96E5B2AF1A70FCB50074B77B /* CHDataStructuresiOSTests */;
 			targetProxy = 963818EA1A7105EB0067CF59 /* PBXContainerItemProxy */;
 		};
 		96E5B2B31A70FCB50074B77B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 96E5B2A51A70FCB40074B77B /* iOS */;
+			target = 96E5B2A51A70FCB40074B77B /* CHDataStructuresiOSFramework */;
 			targetProxy = 96E5B2B21A70FCB50074B77B /* PBXContainerItemProxy */;
 		};
 		E428B52F0EA537D9007CB324 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8DC2EF4F0486A6940098B216 /* Mac */;
+			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
 			targetProxy = E428B52E0EA537D9007CB324 /* PBXContainerItemProxy */;
 		};
 		E43C876C0EA3D35C00B3B31E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8DC2EF4F0486A6940098B216 /* Mac */;
+			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
 			targetProxy = E43C876B0EA3D35C00B3B31E /* PBXContainerItemProxy */;
 		};
 		E43C87A50EA3E19500B3B31E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E43C87680EA3D35500B3B31E /* Deployment */;
+			target = E43C87680EA3D35500B3B31E /* CHDataStructuresDeployment */;
 			targetProxy = E43C87A40EA3E19500B3B31E /* PBXContainerItemProxy */;
 		};
 		E4A721AA0EA7AEFB00E0AC21 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8DC2EF4F0486A6940098B216 /* Mac */;
+			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
 			targetProxy = E4A721A90EA7AEFB00E0AC21 /* PBXContainerItemProxy */;
 		};
 		E4FAE15F0E968F20007BB1F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8DC2EF4F0486A6940098B216 /* Mac */;
+			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
 			targetProxy = E4FAE15E0E968F20007BB1F9 /* PBXContainerItemProxy */;
 		};
 		E4FAE1610E968F20007BB1F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E473CB540E9346CB005CA997 /* MacTests */;
+			target = E473CB540E9346CB005CA997 /* CHDataStructuresMacTests */;
 			targetProxy = E4FAE1600E968F20007BB1F9 /* PBXContainerItemProxy */;
 		};
 		E4FAE1630E968F20007BB1F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E4FE76D80E89556A00971EE6 /* Documentation */;
+			target = E4FE76D80E89556A00971EE6 /* CHDataStructuresDocumentation */;
 			targetProxy = E4FAE1620E968F20007BB1F9 /* PBXContainerItemProxy */;
 		};
 		E4FAE1650E968F20007BB1F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = E44B59B30E95850F00F9DD1A /* Benchmarks */;
+			target = E44B59B30E95850F00F9DD1A /* CHDataStructuresBenchmarks */;
 			targetProxy = E4FAE1640E968F20007BB1F9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1188,12 +1192,9 @@
 		1DEB91AE08733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_GC = no;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = source/CHDataStructures_Prefix.pch;
 				INFOPLIST_FILE = "resources/Info-Framework.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
@@ -1204,12 +1205,9 @@
 		1DEB91AF08733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
-				GCC_ENABLE_OBJC_GC = no;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = source/CHDataStructures_Prefix.pch;
 				INFOPLIST_FILE = "resources/Info-Framework.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
@@ -1219,50 +1217,48 @@
 		};
 		1DEB91B208733DA50010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_SYMBOL_SEPARATION = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_USE_GCC3_PFE_SUPPORT = YES;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = CHDataStructures;
+				SDKROOT = macosx10.10;
 			};
 			name = Debug;
 		};
 		1DEB91B308733DA50010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_ENABLE_SYMBOL_SEPARATION = NO;
 				GCC_USE_GCC3_PFE_SUPPORT = YES;
+				GCC_VERSION = "";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_SIGN_COMPARE = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_NAME = CHDataStructures;
+				SDKROOT = macosx10.10;
 			};
 			name = Release;
 		};
@@ -1548,7 +1544,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "Mac" */ = {
+		1DEB91AD08733DA50010E9CD /* Build configuration list for PBXNativeTarget "CHDataStructuresMacFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB91AE08733DA50010E9CD /* Debug */,
@@ -1566,7 +1562,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		87A6F76D24C0D10400D00AA2 /* Build configuration list for PBXAggregateTarget "MacAll" */ = {
+		87A6F76D24C0D10400D00AA2 /* Build configuration list for PBXAggregateTarget "CHDataStructuresMacAll" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				87A6F76E24C0D10400D00AA2 /* Debug */,
@@ -1575,7 +1571,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		96E5B2BF1A70FCB50074B77B /* Build configuration list for PBXNativeTarget "iOS" */ = {
+		96E5B2BF1A70FCB50074B77B /* Build configuration list for PBXNativeTarget "CHDataStructuresiOSFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96E5B2B91A70FCB50074B77B /* Debug */,
@@ -1584,7 +1580,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		96E5B2C01A70FCB50074B77B /* Build configuration list for PBXNativeTarget "iOSTests" */ = {
+		96E5B2C01A70FCB50074B77B /* Build configuration list for PBXNativeTarget "CHDataStructuresiOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96E5B2BC1A70FCB50074B77B /* Debug */,
@@ -1593,7 +1589,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		E43C87740EA3D36600B3B31E /* Build configuration list for PBXAggregateTarget "Deployment" */ = {
+		E43C87740EA3D36600B3B31E /* Build configuration list for PBXAggregateTarget "CHDataStructuresDeployment" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E43C87690EA3D35500B3B31E /* Debug */,
@@ -1602,7 +1598,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		E44B59CB0E95853300F9DD1A /* Build configuration list for PBXNativeTarget "Benchmarks" */ = {
+		E44B59CB0E95853300F9DD1A /* Build configuration list for PBXNativeTarget "CHDataStructuresBenchmarks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E44B59B80E95851000F9DD1A /* Debug */,
@@ -1611,7 +1607,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		E473CB690E9346F3005CA997 /* Build configuration list for PBXNativeTarget "MacTests" */ = {
+		E473CB690E9346F3005CA997 /* Build configuration list for PBXNativeTarget "CHDataStructuresMacTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E473CB580E9346CB005CA997 /* Debug */,
@@ -1620,7 +1616,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		E4FAE1670E968F3F007BB1F9 /* Build configuration list for PBXAggregateTarget "All" */ = {
+		E4FAE1670E968F3F007BB1F9 /* Build configuration list for PBXAggregateTarget "CHDataStructuresAll" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4FAE15C0E968F1B007BB1F9 /* Debug */,
@@ -1629,7 +1625,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		E4FE76F70E8955BB00971EE6 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+		E4FE76F70E8955BB00971EE6 /* Build configuration list for PBXAggregateTarget "CHDataStructuresDocumentation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4FE76D90E89556A00971EE6 /* Debug */,

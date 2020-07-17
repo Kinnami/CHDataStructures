@@ -11,7 +11,6 @@
  */
 
 #import <Foundation/Foundation.h>
-#import <CoreServices/CoreServices.h>
 
 // Protocols
 #import "CHDeque.h"

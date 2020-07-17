@@ -24,6 +24,7 @@ phpMyAdmin/
 phpliteadmin.php
 tags
 .fontconfig/
+*.framework/
 
 #ignore local conf (or other) files
 local_*

@@ -213,7 +213,7 @@ static NSArray *abcde;
 	e = [set objectEnumerator];
 	XCTAssertNotNil(e);
 	XCTAssertEqual([set retainCount], (NSUInteger)2);
-	[pool drain]; // Force deallocation of autoreleased enumerator
+	[pool release]; // Force deallocation of autoreleased enumerator
 	XCTAssertEqual([set retainCount], (NSUInteger)1);
 	
 	// Test mutation in the middle of enumeration

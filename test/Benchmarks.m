@@ -151,7 +151,7 @@ void benchmarkDeque(Class testClass) {
 	}
 	
 	CHQuietLog(@"");
-	[pool drain];
+	[pool release];
 }
 
 void benchmarkQueue(Class testClass) {
@@ -229,7 +229,7 @@ void benchmarkQueue(Class testClass) {
 	}
 	
 	CHQuietLog(@"");
-	[pool drain];
+	[pool release];
 }
 
 void benchmarkStack(Class testClass) {
@@ -307,7 +307,7 @@ void benchmarkStack(Class testClass) {
 	}
 	
 	CHQuietLog(@"");
-	[pool drain];
+	[pool release];
 }
 
 void benchmarkHeap(Class testClass) {
@@ -384,7 +384,7 @@ void benchmarkHeap(Class testClass) {
 	}
 	
 	CHQuietLog(@"");
-	[pool drain];
+	[pool release];
 }
 
 void benchmarkTree(Class testClass) {
@@ -447,7 +447,7 @@ void benchmarkTree(Class testClass) {
 	}
 	
 	CHQuietLog(@"");
-	[pool drain];
+	[pool release];
 }
 
 NSArray* randomNumberArray(NSUInteger count) {
@@ -455,7 +455,7 @@ NSArray* randomNumberArray(NSUInteger count) {
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	while ([objectSet count] < count)
 		[objectSet addObject:[NSNumber numberWithInt:arc4random()]];
-	[pool drain];
+	[pool release];
 	return [objectSet allObjects];
 }
 
@@ -592,7 +592,7 @@ int main (int argc, const char * argv[]) {
 				 [NSString stringWithFormat:@"%lu,%f", (unsigned long) jitteredSize, duration/size*scale]];
 				
 				[tree release];
-				[pool2 drain];
+				[pool2 release];
 			}
 		}
 	}
@@ -623,6 +623,6 @@ int main (int argc, const char * argv[]) {
 		}
 	}
 	
-	[pool drain];
+	[pool release];
 	return 0;
 }

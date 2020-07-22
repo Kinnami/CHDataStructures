@@ -644,6 +644,7 @@
 		E4BD316A0FEEE79C00A084B2 /* Framework Code */ = {
 			isa = PBXGroup;
 			children = (
+				87A6F93E24C1F35800D00AA2 /* GNUmakefile */,
 				E442DFA70E8F1BDF00BD62F6 /* CHDataStructures.h */,
 				E4E7C1260EC0CACE009B19D7 /* CHDataStructures_Prefix.pch */,
 				E44773A10E913C89000889F7 /* Util.h */,

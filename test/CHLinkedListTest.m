@@ -336,7 +336,7 @@
 		XCTAssertNotNil(e);
 		XCTAssertEqual([list retainCount], (NSUInteger)2);
 		// Force deallocation of enumerator by draining autorelease pool
-		[pool drain];
+		[pool release];
 		XCTAssertEqual([list retainCount], (NSUInteger)1);	
 		
 		// For doubly-linked list, test reverse enumeration order as well

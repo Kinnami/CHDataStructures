@@ -17,6 +17,39 @@
  A group of utility C functions for simplifying common exceptions and logging.
  */
 
+/* CJEC, 17-Jul-20: Add additional definitions for building with GNUstep
+*/
+#if defined (GNUSTEP)
+
+/* Defined in Apple's objc-api.h
+*/
+#if !defined(OBJC_EXTERN)
+#   if defined(__cplusplus)
+#       define OBJC_EXTERN extern "C" 
+#   else
+#       define OBJC_EXTERN extern
+#   endif
+#endif
+
+#if !defined(OBJC_VISIBLE)
+#   if TARGET_OS_WIN32
+#       if defined(BUILDING_OBJC)
+#           define OBJC_VISIBLE __declspec(dllexport)
+#       else
+#           define OBJC_VISIBLE __declspec(dllimport)
+#       endif
+#   else
+#       define OBJC_VISIBLE  __attribute__((visibility("default")))
+#   endif
+#endif
+
+#if !defined(OBJC_EXPORT)
+#   define OBJC_EXPORT  OBJC_EXTERN OBJC_VISIBLE
+#endif
+
+#endif	/* defined (GNUSTEP) */
+
+
 /** Macro for reducing visibility of symbol names not indended to be exported. */
 #define HIDDEN __attribute__((visibility("hidden")))
 

@@ -366,6 +366,8 @@
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		877E471124C8DAEB00A7DEFF /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; name = GNUmakefile; path = source/GNUmakefile; sourceTree = "<group>"; };
+		877E471224C8DB3200A7DEFF /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHMultiOrderedDictionary.h; path = source/CHMultiOrderedDictionary.h; sourceTree = "<group>"; };
 		87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHMultiOrderedDictionary.m; path = source/CHMultiOrderedDictionary.m; sourceTree = "<group>"; };
 		87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "AmiShare-release.xcconfig"; path = "../../Makefiles/Darwin/AmiShare-release.xcconfig"; sourceTree = "<group>"; };
@@ -519,6 +521,7 @@
 			children = (
 				87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */,
 				87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */,
+				877E471224C8DB3200A7DEFF /* GNUmakefile */,
 				E4BD316A0FEEE79C00A084B2 /* Framework Code */,
 				E473C9A70E933350005CA997 /* Unit Test Code */,
 				E4CFCDAD0E8FD16400B0253A /* Documentation */,
@@ -644,7 +647,7 @@
 		E4BD316A0FEEE79C00A084B2 /* Framework Code */ = {
 			isa = PBXGroup;
 			children = (
-				87A6F93E24C1F35800D00AA2 /* GNUmakefile */,
+				877E471124C8DAEB00A7DEFF /* GNUmakefile */,
 				E442DFA70E8F1BDF00BD62F6 /* CHDataStructures.h */,
 				E4E7C1260EC0CACE009B19D7 /* CHDataStructures_Prefix.pch */,
 				E44773A10E913C89000889F7 /* Util.h */,

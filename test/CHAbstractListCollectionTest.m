@@ -323,14 +323,14 @@
 - (void) testRemoveObjectsAtIndexes {
 	// Test removing with invalid indexes
 	XCTAssertThrows([collection removeObjectsAtIndexes:nil]);
-	NSMutableIndexSet* indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)];
+	NSMutableIndexSet* indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(0, 1)];
 	XCTAssertThrows([collection removeObjectsAtIndexes:indexes]);
 	
 	NSMutableArray* expected = [NSMutableArray array];
 	[collection addObjectsFromArray:objects];
 	for (NSUInteger location = 0; location < [objects count]; location++) {
 		for (NSUInteger length = 0; length <= [objects count] - location; length++) {
-			indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(location, length)]; 
+			indexes = [NSMutableIndexSet indexSetWithIndexesInRange:NSMakeRange(location, length)];
 			// Repopulate list and expected
 			[expected removeAllObjects];
 			[expected addObjectsFromArray:objects];

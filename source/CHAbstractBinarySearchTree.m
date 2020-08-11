@@ -468,7 +468,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 		pSelCompare = [[self class] SelCompare: a_uiNestingLevel];
 		if ([a_po respondsToSelector: pSelCompare])					/* If the object responds to the appropriate comparison method */
 			{
-			poNew = [[[self class] alloc] initWithOptions: fuiOptions];
+			poNew = [[[self class] alloc] initWithTreeOptions: fuiOptions];
 			*a_pfMultiLevel = true;
 			}
 		}
@@ -479,7 +479,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 
 // This is the designated initializer for CHAbstractBinarySearchTree, CHBinarySearchTree and all its derived classes
 // CJEC, 1-Jul-13: New designated intialiser specifies options from CHTreeOptions
-- (id) initWithOptions: (unsigned int) a_fuiOptions {
+- (id) initWithTreeOptions: (unsigned int) a_fuiOptions {
 	if ((self = [super init]) == nil)
 		{
 		[self release];						/* CJEC, 12-Feb-15: Avoid memory leak when initialisation fails */
@@ -492,7 +492,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 
 // CJEC, 1-Jul-13: Default initialiser behaves like the original code
 - (id)	init {
-	return [self initWithOptions: 0];
+	return [self initWithTreeOptions: 0];
 }
 // Calling [self init] allows child classes to initialize their specific state.
 // (The -init method in any subclass must always call to -[super init] first.)
@@ -524,7 +524,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 		[a_poCoder decodeValueOfObjCType: @encode (int) at: &fiOptions];
 		[a_poCoder decodeValueOfObjCType: @encode (NSInteger) at: &cObjects];
 		}
-	self = [self initWithOptions: fiOptions];
+	self = [self initWithTreeOptions: fiOptions];
 	for (uiCount = 0; uiCount < cObjects; uiCount ++)
 		{
 		if (fAllowsKeyCoding)
@@ -545,7 +545,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 #pragma mark <NSCopying> methods
 
 - (id) copyWithZone:(NSZone*)zone {
-	id<CHSearchTree> newTree = [[[self class] allocWithZone:zone] initWithOptions: [self GetOptions]];
+	id<CHSearchTree> newTree = [[[self class] allocWithZone:zone] initWithTreeOptions: [self GetOptions]];
 	// No point in using fast enumeration here until rdar://6296108 is addressed.
 	NSEnumerator *e = [self objectEnumeratorWithTraversalOrder:CHTraverseLevelOrder options: 0];	/* 18-Jul-13: CJEC: Don't bother enumerating sub-levels. Just copy en masse */
 	id anObject;
@@ -759,10 +759,10 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 // This is the designated initializer for CHBinarySearchTree, CHBinarySearchTree and all its derived classes
 // Only to be called from concrete child classes to initialize shared variables.
 // CJEC, 1-Jul-13: New designated intialiser specifies options from CHTreeOptions
-- (id) initWithOptions: (unsigned int) a_fuiOptions {
+- (id) initWithTreeOptions: (unsigned int) a_fuiOptions {
 	bool	fOK;
 	
-	self = [super initWithOptions: a_fuiOptions];
+	self = [super initWithTreeOptions: a_fuiOptions];
 	fOK = (self != nil);
 	if (fOK)
 		{
@@ -908,7 +908,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 				}
 			else
 				{
-				unsigned int	cObjects;
+				NSUInteger	cObjects;
 				
 				cObjects = [current -> object count];
 				if (cObjects + batchCount < len)	/* Ensure that the sub-collection(s)' objects can fit in the stack, if so use fast enumeration which is almost always quicker and has mutation protection */
@@ -922,7 +922,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 					}
 				else						/* If the sub-collection count won't fit, we can't use fast enumeration on it */
 					{
-					NSLog (@"Current node %p. Could not fit %u sub-objects in %u limit with with fast enumeration. Using object enumeration", current, cObjects, len);
+					NSLog (@"Current node %p. Could not fit %lu sub-objects in %lu limit with with fast enumeration. Using object enumeration", current, (unsigned long) cObjects, (unsigned long) len);
 					NSAssert ((id) state -> extra [3] != nil, @"Already using an object enumerator?");	/* Note: Assume sub-collection supports objectEnumerator */
 					state -> extra [3] = (unsigned long) ((id __strong) [[current -> object objectEnumerator] retain]);	/* Note: Retain it so we don't get messed up by autorelease pools */
 					do						/* CJEC, 5-Jul-13: TODO: Use state -> extra [4] to protect against a mutation of state -> extra [3] */
@@ -1125,7 +1125,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 	// If both parameters are nil, return a copy containing all the objects.
 	if (a_poStart == nil && a_poEnd == nil)
 		return [[self copy] autorelease];
-	poSortedSetSubset = [[[[self class] alloc] initWithOptions: m_fuiOptions] autorelease];	/* CJEC, 5-Jul-13: FIXME: This could be more efficient. We should avoid allocating the subset unless we're going to use it, and we won't if the arguments' ordering is NSOrderedSame */
+	poSortedSetSubset = [[[[self class] alloc] initWithTreeOptions: m_fuiOptions] autorelease];	/* CJEC, 5-Jul-13: FIXME: This could be more efficient. We should avoid allocating the subset unless we're going to use it, and we won't if the arguments' ordering is NSOrderedSame */
 	if (count == 0)
 		return poSortedSetSubset;
 	poInvocationCompare = [[self class] InvocationCompare: ((a_poStart != nil) ? a_poStart : a_poEnd) nestingLevel: a_uiNestingLevel];	/* Note: Technically, we should use the other object as we're sending the compare*: method to it. But compare*: must be symmetric so we use the (non-nil) argument because we already have it */

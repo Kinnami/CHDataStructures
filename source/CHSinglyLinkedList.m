@@ -59,7 +59,7 @@ static size_t kCHSinglyLinkedListNodeSize = sizeof(CHSinglyLinkedListNode);
 
 - (id) initWithList:(CHSinglyLinkedList*)list
           startNode:(CHSinglyLinkedListNode*)startNode
-    mutationPointer:(unsigned long*)mutations;
+    mutationPointer:(unsigned long*)mutations
 {
 	if ((self = [super init]) == nil) return nil;
 	collection = (startNode != NULL) ? collection = [list retain] : nil;

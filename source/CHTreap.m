@@ -24,8 +24,8 @@
 }
 
 // CJEC, 1-Jul-13: New designated intialiser specifies options from CHTreeOptions
-- (id) initWithOptions: (unsigned int) a_fuiOptions {
-	if ((self = [super initWithOptions: a_fuiOptions]) == nil) return nil;
+- (id) initWithTreeOptions: (unsigned int) a_fuiOptions {
+	if ((self = [super initWithTreeOptions: a_fuiOptions]) == nil) return nil;
 	header ->priority = CHTreapNotFound; // This is the highest possible priority
 	return self;
 }

@@ -136,7 +136,7 @@ typedef enum {
 /* CJEC, 23-Jul-13: Declare a new protocol for multi-level tree support, allowing the use of -[NSObject conformToProtocol:] rather than -[NSObject respondsToSelector:] */
 @protocol  CHMultiLevelTreeP <CHSearchTree>
 
-- (id)		initWithOptions: (unsigned int) a_fuiOptions;	/* CJEC, 1-Jul-13: Support multi-level trees. New designated initialiser. init calls this with options == 0 */
+- (id)		initWithTreeOptions: (unsigned int) a_fuiTreeOptions;	/* CJEC, 1-Jul-13: Support multi-level trees. New designated initialiser. init calls this with options == 0 */
 + (Class)	ClassCollectionDefault;							/* CJEC, 19-Jul-13: Support multiple objects all ordered NSOrderedSame at the same leaf. Default class used with CHTreeOptionsMultiLeaves collections */
 
 - (void)	addObject: (id) a_po nestingLevel: (unsigned int) a_fuiNestingLevel;	/* CJEC, 8-Jul-13: Support multi-level trees. Overridden in concrete class */

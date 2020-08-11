@@ -73,7 +73,7 @@ static size_t kCHDoublyLinkedListNodeSize = sizeof(CHDoublyLinkedListNode);
           startNode:(CHDoublyLinkedListNode*)startNode
             endNode:(CHDoublyLinkedListNode*)endNode
           direction:(NSComparisonResult)direction
-    mutationPointer:(unsigned long*)mutations;
+    mutationPointer:(unsigned long*)mutations
 {
 	if ((self = [super init]) == nil) return nil;
 	collection = ([list count] > 0) ? [list retain] : nil;

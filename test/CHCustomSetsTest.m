@@ -421,7 +421,7 @@ static NSArray *abc;
 	[set addObjectsFromArray:abc];
 	for (NSUInteger i = 0; i < [abc count]; i++) {
 		XCTAssertEqualObjects([set objectAtIndex:i], [abc objectAtIndex:i],
-					   @"Wrong object at index %d.", i);
+					   @"Wrong object at index %lu.", (unsigned long) i);
 	}
 }
 
@@ -515,7 +515,7 @@ static NSArray *abc;
 	XCTAssertThrows([set removeObjectAtIndex:[abc count]]);
 	for (NSInteger i = [abc count]-1; i >= 0; i--) {
 		XCTAssertEqualObjects([set lastObject], [abc objectAtIndex:i],
-							 @"Wrong object at index %d before remove.", i);
+							 @"Wrong object at index %lu before remove.", (unsigned long) i);
 		[set removeObjectAtIndex:i];
 	}
 }

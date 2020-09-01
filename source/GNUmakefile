@@ -31,7 +31,11 @@ $(FRAMEWORK_NAME)_INCLUDE_DIRS	=
 $(FRAMEWORK_NAME)_CPPFLAGS 		=
 $(FRAMEWORK_NAME)_CFLAGS 		=
 $(FRAMEWORK_NAME)_OBJCFLAGS 	=
+
+# Linux requires libbsd for arc4random(3bsd)
+ifeq ($(GNUSTEP_HOST_OS), linux-gnu)
 $(FRAMEWORK_NAME)_LDFLAGS 		= -lbsd
+endif
 
 # Framework principal class
 #$(FRAMEWORK_NAME)_PRINCIPAL_CLASS	=

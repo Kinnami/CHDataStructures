@@ -132,7 +132,7 @@
 		969123E61A7100480073C75A /* CHSortedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = E4558DB40FE7599500CC5860 /* CHSortedDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		969123E71A7100480073C75A /* CHTreap.h in Headers */ = {isa = PBXBuildFile; fileRef = E41035260EC409B900C2CFB9 /* CHTreap.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		969123E81A7100480073C75A /* CHUnbalancedTree.h in Headers */ = {isa = PBXBuildFile; fileRef = E4ADBB220E88174200B570BC /* CHUnbalancedTree.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		96E5B2B11A70FCB50074B77B /* CHDataStructures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96E5B2A61A70FCB40074B77B /* CHDataStructures.framework */; };
+		96E5B2B11A70FCB50074B77B /* CHDataStructuresIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96E5B2A61A70FCB40074B77B /* CHDataStructuresIOS.framework */; };
 		96E5B2C11A70FDAE0074B77B /* CHAbstractListCollectionTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4A720C50EA78DCE00E0AC21 /* CHAbstractListCollectionTest.m */; };
 		96E5B2C21A70FDAE0074B77B /* CHCircularBufferTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D3A4C60F789FF500E21CF8 /* CHCircularBufferTest.m */; };
 		96E5B2C31A70FDAE0074B77B /* CHCustomDictionariesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4D48E960FE9510B009BA8BC /* CHCustomDictionariesTest.m */; };
@@ -373,7 +373,7 @@
 		87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "AmiShare-release.xcconfig"; path = "../../Makefiles/Darwin/AmiShare-release.xcconfig"; sourceTree = "<group>"; };
 		87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AmiShare.xcconfig; path = ../../Makefiles/Darwin/AmiShare.xcconfig; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		96E5B2A61A70FCB40074B77B /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96E5B2A61A70FCB40074B77B /* CHDataStructuresIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructuresIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2B01A70FCB50074B77B /* CHDataStructures.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHDataStructures.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E400CAAA0F7919B7003189D3 /* CHCircularBufferQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHCircularBufferQueue.h; path = source/CHCircularBufferQueue.h; sourceTree = "<group>"; };
 		E400CAAB0F7919B7003189D3 /* CHCircularBufferQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHCircularBufferQueue.m; path = source/CHCircularBufferQueue.m; sourceTree = "<group>"; };
@@ -481,7 +481,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				96E5B2B11A70FCB50074B77B /* CHDataStructures.framework in Frameworks */,
+				96E5B2B11A70FCB50074B77B /* CHDataStructuresIOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +510,7 @@
 				8DC2EF5B0486A6940098B216 /* CHDataStructures.framework */,
 				E473CB550E9346CB005CA997 /* CHDataStructures.xctest */,
 				E44B59B40E95850F00F9DD1A /* Benchmarks */,
-				96E5B2A61A70FCB40074B77B /* CHDataStructures.framework */,
+				96E5B2A61A70FCB40074B77B /* CHDataStructuresIOS.framework */,
 				96E5B2B01A70FCB50074B77B /* CHDataStructures.xctest */,
 			);
 			name = Products;
@@ -806,7 +806,7 @@
 			);
 			name = CHDataStructuresiOSFramework;
 			productName = iOS;
-			productReference = 96E5B2A61A70FCB40074B77B /* CHDataStructures.framework */;
+			productReference = 96E5B2A61A70FCB40074B77B /* CHDataStructuresIOS.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		96E5B2AF1A70FCB50074B77B /* CHDataStructuresiOSTests */ = {
@@ -1317,6 +1317,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = CHDataStructuresIOS;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

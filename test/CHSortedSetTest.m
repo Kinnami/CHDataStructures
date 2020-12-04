@@ -443,7 +443,10 @@ static NSArray *abcde;
 	BOOL raisedException = NO;
 	@try {
 		for (id object in set)
+			{
+			(void) object;					/* Avoid unused parameter warning */
 			[set addObject:[NSNumber numberWithInteger:-1]];
+			}
 	}
 	@catch (NSException *exception) {
 		raisedException = YES;
@@ -536,11 +539,11 @@ static NSArray *abcde;
 	for (NSUInteger i = 0; i < [sortedSetClasses count]; i++) {
 		tree1 = [equalTrees objectAtIndex:i];
 		tree2 = [equalTrees objectAtIndex:i+1];
-		XCTAssertEqual([tree1 hash], [tree2 hash]);
-		XCTAssertEqualObjects(tree1, tree2);
+		XCTAssertEqual((id <CHSearchTree>) [tree1 hash], (id <CHSearchTree>) [tree2 hash]);
+		XCTAssertEqualObjects((id <CHSearchTree>) tree1, (id <CHSearchTree>)tree2);
 	}
-	XCTAssertFalse([tree1 isEqualToSearchTree:[NSArray array]]);
-	XCTAssertThrowsSpecificNamed([tree1 isEqualToSearchTree:[NSString string]], NSException, NSInvalidArgumentException);
+	XCTAssertFalse([tree1 isEqualToSearchTree: (id <CHSearchTree>) [NSArray array]]);
+	XCTAssertThrowsSpecificNamed([tree1 isEqualToSearchTree: (id <CHSearchTree>) [NSString string]], NSException, NSInvalidArgumentException);
 }
 
 @end
@@ -587,7 +590,7 @@ static NSArray *abcde;
 
 - (void) testDebugDescriptionForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->level = 1;
 	XCTAssertEqualObjects([set debugDescriptionForNode:node],
 						 @"[1]\t\"A B C\"");
@@ -596,7 +599,7 @@ static NSArray *abcde;
 
 - (void) testDotGraphStringForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->level = 1;
 	XCTAssertEqualObjects([set dotGraphStringForNode:node],
 						 @"  \"A B C\" [label=\"A B C\\n1\"];\n");
@@ -755,7 +758,7 @@ static NSArray *abcde;
 
 - (void) testDebugDescriptionForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->balance = 0;
 	XCTAssertEqualObjects([set debugDescriptionForNode:node],
 						 @"[ 0]\t\"A B C\"");
@@ -764,7 +767,7 @@ static NSArray *abcde;
 
 - (void) testDotGraphStringForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->balance = 0;
 	XCTAssertEqualObjects([set dotGraphStringForNode:node],
 						 @"  \"A B C\" [label=\"A B C\\n0\"];\n");
@@ -1035,7 +1038,7 @@ static NSArray *abcde;
 
 - (void) testDebugDescriptionForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->color = kRED;
 	XCTAssertEqualObjects([set debugDescriptionForNode:node],
 						 @"[ RED ]	\"A B C\"");
@@ -1047,7 +1050,7 @@ static NSArray *abcde;
 
 - (void) testDotGraphStringForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->color = kRED;
 	XCTAssertEqualObjects([set dotGraphStringForNode:node],
 						 @"  \"A B C\" [color=red];\n");
@@ -1227,7 +1230,7 @@ static NSArray *abcde;
 
 - (void) testDebugDescriptionForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->priority = 123456789;
 	XCTAssertEqualObjects([set debugDescriptionForNode:node],
 						 @"[  123456789]\t\"A B C\"");
@@ -1236,7 +1239,7 @@ static NSArray *abcde;
 
 - (void) testDotGraphStringForNode {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	node->priority = 123456789;
 	XCTAssertEqualObjects([set dotGraphStringForNode:node],
 						 @"  \"A B C\" [label=\"A B C\\n123456789\"];\n");
@@ -1392,7 +1395,7 @@ static NSArray *abcde;
 
 - (void) testDotGraphString {
 	CHBinaryTreeNode *node = malloc(sizeof(CHBinaryTreeNode));
-	node->object = [NSString stringWithString:@"A B C"];
+	node->object = [NSString stringWithFormat: @"%@", @"A B C"];	/* Force the creation of a new string object with the same value as the literal. -[NSString stringWithString:] generates a warning that the method is redundant */
 	XCTAssertEqualObjects([set dotGraphStringForNode:node], @"  \"A B C\";\n");
 	free(node);
 	
@@ -1407,7 +1410,7 @@ static NSArray *abcde;
 		[expected appendFormat:@"  nil%d [shape=point,fillcolor=black];\n", i];
 	[expected appendFormat:@"}\n"];
 	
-	XCTAssertEqualObjects([zigzagTree dotGraphString], expected);
+	XCTAssertEqualObjects([(CHBinarySearchTree *) zigzagTree dotGraphString], expected);
 	
 	// Test for empty tree
 	XCTAssertEqualObjects([set dotGraphString],

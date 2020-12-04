@@ -14,6 +14,10 @@
 	Copyright © 2015-2020	Kinnami Software Corporation. All rights reserved.
  */
 
+#if defined (__linux__)
+#include <bsd/stdlib.h>										/* For arc4random(3bsd) */
+#endif	/* defined (__linux__) */
+
 #import "CHTreap.h"
 #import "CHAbstractBinarySearchTree_Internal.h"
 
@@ -54,7 +58,7 @@
 		current = current->link[comparison == NSOrderedAscending]; // R on YES
 	}
 	parent = CHBinaryTreeStack_POP();
-	NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+	NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 	
 	[anObject retain]; // Must retain whether replacing value or adding new node
 	u_int32_t direction;
@@ -68,7 +72,7 @@
 			direction = (current->right->priority > current->left->priority);
 			if (current->priority >= current->link[direction]->priority)
 				break;
-			NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+			NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 			singleRotation(current, !direction, parent);
 			parent = current;
 			current = current->link[!direction];
@@ -89,7 +93,7 @@
 	while (parent != header && current->priority > parent->priority) {
 		// Rotate current node up, push parent down to opposite subtree.
 		direction = (parent->left == current);
-		NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+		NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 		NSAssert(stackSize > 0, @"Illegal state, stack should never be empty!");
 		singleRotation(parent, direction, CHBinaryTreeStack_TOP);
 		parent = CHBinaryTreeStack_POP();
@@ -102,7 +106,7 @@
 		return;
 	++mutations;
 	
-	CHBinaryTreeNode *parent = nil, *current = header;
+	CHBinaryTreeNode *parent = NULL, *current = header;
 	NSComparisonResult comparison;
 	u_int32_t direction;
 	
@@ -112,7 +116,7 @@
 		parent = current;
 		current = current->link[comparison == NSOrderedAscending]; // R on YES
 	}
-	NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+	NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 	
 	if (current != sentinel) {
 		// Percolate node down the tree, always rotating towards lower priority

@@ -84,7 +84,10 @@
 		BOOL raisedException = NO;
 		@try {
 			for (id object in list)
+				{
+				(void) object;				/* Avoid unused parameter warning */
 				[list addObject:@"bogus"];
+				}
 		}
 		@catch (NSException *exception) {
 			raisedException = YES;
@@ -449,7 +452,7 @@
 	id<CHLinkedList> list1, list2;
 	for (NSUInteger i = 0; i < [linkedListClasses count]; i++) {
 		list1 = [equalLinkedLists objectAtIndex:i];
-		XCTAssertThrowsSpecificNamed([list1 isEqualToLinkedList:[NSString string]], NSException, NSInvalidArgumentException);
+		XCTAssertThrowsSpecificNamed([list1 isEqualToLinkedList: (id <CHLinkedList>) [NSString string]], NSException, NSInvalidArgumentException);
 		XCTAssertFalse([list1 isEqual:[NSString string]]);
 		XCTAssertEqualObjects(list1, list1);
 		list2 = [emptyLinkedLists objectAtIndex:i];

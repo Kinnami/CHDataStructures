@@ -37,7 +37,7 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 	CFMutableDictionaryRef dictionary; // A Core Foundation dictionary.
 }
 
-- (id) initWithCapacity:(NSUInteger)numItems;
+- (id) initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;
 
 - (NSUInteger) count;
 - (NSEnumerator*) keyEnumerator;

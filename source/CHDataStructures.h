@@ -15,7 +15,7 @@
  */
 
 #if defined (__linux__)
-#include <bsd/stdlib.h>
+#include <bsd/stdlib.h>										/* For arc4random(3bsd) */
 #endif	/* defined (__linux__) */
 
 #import <Foundation/Foundation.h>

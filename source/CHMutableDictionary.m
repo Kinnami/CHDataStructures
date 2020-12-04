@@ -16,6 +16,12 @@
 
 #import "CHMutableDictionary.h"
 
+/*****************************************************************************/
+/*	DEBUG: Define this to log all "dealloc IN" messages for debugging memory
+			management
+*/
+// #define DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN		1
+
 #pragma mark CFDictionary callbacks
 
 const void* CHDictionaryRetain(CFAllocatorRef allocator, const void *value) {
@@ -64,8 +70,6 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 	                                       initialCapacity,
 	                                       &kCHDictionaryKeyCallBacks,
 	                                       &kCHDictionaryValueCallBacks);
-	// Hand the reference off to GC if it's enabled, perform a no-op otherwise.
-	CFMakeCollectable(*dictionary);
 }
 
 #pragma mark -
@@ -73,6 +77,10 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 @implementation CHMutableDictionary
 
 - (void) dealloc {
+#if defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN)
+	NSLog (@"dealloc IN %p (class %@)", self, [self class]);
+#endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
+	NSAssert (dictionary != NULL, @"Invalid dictionary IN %p (class %@)", self, [self class]);
 	CFRelease(dictionary); // The dictionary will never be null at this point.
 	[super dealloc];
 }
@@ -87,8 +95,33 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 - (id) initWithCapacity:(NSUInteger)numItems {
 	if ((self = [super init]) == nil) return nil;
 	createCollectableCFMutableDictionary(&dictionary, numItems);
+	NSAssert (dictionary != NULL, @"Could not create dictionary IN %p (class %@)", self, [self class]);
+	if (dictionary == NULL)
+		{
+		[self release];
+		self = nil;
+		}
+#if defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN)
+	else
+		NSLog (@"Created dictionary %p IN %p (class %@)", dictionary, self, [self class]);
+#endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
 	return self;
 }
+
+// Ovverridden to ensure that this object's dictionary member is initialised
+//	even when the argument is empty.
+// Note: Disable the compiler warning "convenience initializer should not invoke an initializer on 'super'"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wobjc-designated-initializers"
+- (id)	initWithDictionary: (NSDictionary *) a_poDict
+	{
+	if ([a_poDict count] == 0)			/* GNUstep's -[NSDictionary initWithDictionary:] does not call the default initialiser if the argument is empty */
+		self = [self init];
+	else
+		self = [super initWithDictionary: a_poDict];
+	return self;
+	}
+#pragma GCC diagnostic pop
 
 #pragma mark <NSCoding>
 
@@ -98,11 +131,36 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 }
 
 - (id) initWithCoder:(NSCoder*)decoder {
-	return [self initWithDictionary:[decoder decodeObjectForKey:@"dictionary"]];
+	NSDictionary *	poDict;
+	
+	if ([decoder allowsKeyedCoding])
+		poDict = [decoder decodeObjectForKey: @"dictionary"];
+	else
+		poDict = [decoder decodeObject];
+	NSAssert (poDict != nil, @"Could not decode dictionary using coder %@ IN %p (class %@)", decoder, self, [self class]);
+	if (poDict == nil)
+		{
+		[self release];
+		self = nil;
+		}
+	else
+		{
+		self = [self initWithDictionary: poDict];
+		NSAssert (self != nil, @"Could not initialise CHMutableDictionary using dictionary %@ IN %p (class %@)", poDict, self, [self class]);
+		NSAssert (dictionary != NULL, @"Could not create dictionary IN %p (class %@)", self, [self class]);
+		}
+#if defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN)
+	if (self != nil)
+		NSLog (@"Created dictionary %p IN %p (class %@)", dictionary, self, [self class]);
+#endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
+	return self;
 }
 
 - (void) encodeWithCoder:(NSCoder*)encoder {
-	[encoder encodeObject:(NSDictionary*)dictionary forKey:@"dictionary"];
+	if ([encoder allowsKeyedCoding])
+		[encoder encodeObject: (id) dictionary forKey:@"dictionary"];
+	else
+		[encoder encodeObject: (id) dictionary];
 }
 
 #pragma mark <NSCopying>
@@ -112,6 +170,9 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 	// (It marshals key-value pairs into two id* arrays, then inits from those.)
 	CHMutableDictionary *copy = [[[self class] allocWithZone:zone] init];
 	[copy addEntriesFromDictionary:self];
+#if defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN)
+	NSLog (@"Created dictionary %p copy IN %p (class %@)", copy, self, [self class]);
+#endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
 	return copy;
 }
 
@@ -129,6 +190,14 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 - (NSUInteger) count {
 	return CFDictionaryGetCount(dictionary);
 }
+
+- (NSString *) description
+	{
+	NSString *	poszDescription;
+	
+	poszDescription = [NSString stringWithFormat: @"<<%@: %p>(%lu): dictionary %p>", [self class], self, (unsigned long) [self retainCount], dictionary];
+	return poszDescription;
+	}
 
 - (NSString*) debugDescription {
 	CFStringRef description = CFCopyDescription(dictionary);

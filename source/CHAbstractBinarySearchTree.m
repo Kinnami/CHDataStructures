@@ -281,7 +281,7 @@ static CHSearchTreeHeaderObject *headerObject = nil;
 					// TODO: How to not push/pop leaf nodes unnecessarily?
 				}
 				current = CHBinaryTreeStack_POP(); // Save top node for return value
-				NSAssert(current != nil, @"Illegal state, current should never be nil!");
+				NSAssert((id) current != nil, @"Illegal state, current should never be nil!");
 				id tempObject = current->object;
 				current = current->right;
 				return [self SubcollectionEnumerate: tempObject];
@@ -297,7 +297,7 @@ static CHSearchTreeHeaderObject *headerObject = nil;
 					// TODO: How to not push/pop leaf nodes unnecessarily?
 				}
 				current = CHBinaryTreeStack_POP(); // Save top node for return value
-				NSAssert(current != nil, @"Illegal state, current should never be nil!");
+				NSAssert((id) current != nil, @"Illegal state, current should never be nil!");
 				id tempObject = current->object;
 				current = current->left;
 				return [self SubcollectionEnumerate: tempObject];
@@ -779,7 +779,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 		header = CHCreateBinaryTreeNodeWithObject ([CHSearchTreeHeaderObject object]);
 		header -> right = sentinel;
 		header -> left = sentinel;
-		fOK = (sentinel != nil) && (header != nil);	/* CJEC, 13-Feb-15: Add checks to ensure successful initialisation */
+		fOK = ((id) sentinel != nil) && ((id) header != nil);	/* CJEC, 13-Feb-15: Add checks to ensure successful initialisation */
 		}
 	if (!fOK)
 		{
@@ -870,7 +870,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 		stackCapacity = (NSUInteger) state->extra[1];
 		stackSize = (NSUInteger) state->extra[2];
 	}
-	NSAssert(current != nil, @"Illegal state, current should never be nil!");
+	NSAssert((id) current != nil, @"Illegal state, current should never be nil!");
 	if ((id) state -> extra [3] != nil)		/* CJEC, 5-Jul-13: Already enumerating a sub-collection? */
 		{
 		NSLog (@"Current node %p. Trying to finish object enumeration", current);
@@ -901,7 +901,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 			current = current->left;
 		}
 		current = CHBinaryTreeStack_POP(); // Save top node for return value
-		NSAssert(current != nil, @"Illegal state, current should never be nil!");
+		NSAssert((id) current != nil, @"Illegal state, current should never be nil!");
 		if (m_fuiOptions & CHTreeOptionsMultiLevel)	/* CJEC, 5-Jul-13: Support multi-level collections */
 			{
 			if (![current -> object respondsToSelector: @selector (count)])	

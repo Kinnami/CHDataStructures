@@ -5,6 +5,7 @@
 /bin/
 /lib/
 /docs/
+/benchmark_data/
 
 #Ignore nfs temporary files
 .nfs*

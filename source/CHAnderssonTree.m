@@ -121,7 +121,7 @@
 		++count;
 		// Link from parent as the proper child, based on last comparison
 		parent = CHBinaryTreeStack_POP();
-		NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+		NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 		comparison = [self Compare: poInvocationCompare target: parent -> object argument: nil];	/* Note: Argument hasn't changed so don't need to set it */
 		parent->link[comparison == NSOrderedAscending] = current; // R if YES
 	}
@@ -190,7 +190,7 @@ done:
 	if (current->left == sentinel || current->right == sentinel) {
 		// Single/zero child case -- replace node with non-nil child (if exists)
 		parent = CHBinaryTreeStack_TOP;
-		NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+		NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 		parent->link[parent->right == current]
 			= current->link[current->left == sentinel];
 		free(current);

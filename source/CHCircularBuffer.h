@@ -40,6 +40,7 @@
 // Users should consult the API documentation for NSArray and NSMutableArray.
 
 - (id) initWithArray:(NSArray*)anArray;
+- (id) initWithCapacity:(NSUInteger)capacity NS_DESIGNATED_INITIALIZER;
 
 - (NSArray*) allObjects;
 - (BOOL) containsObject:(id)anObject;

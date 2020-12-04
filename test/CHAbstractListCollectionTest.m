@@ -102,7 +102,10 @@
 	BOOL raisedException = NO;
 	@try {
 		for (id object in collection)
+			{
+			(void) object;					/* Avoid unused parameter warning */
 			[collection addObject:@"bogus"];
+			}
 	}
 	@catch (NSException *exception) {
 		raisedException = YES;

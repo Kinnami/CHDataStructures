@@ -62,7 +62,7 @@ static inline void adjustBalance(CHBinaryTreeNode *root, u_int32_t dir, int32_t 
 		CHNilArgumentException([self class], _cmd);
 	++mutations;
 	
-	CHBinaryTreeNode *parent = nil, *save = nil, *current = header;
+	CHBinaryTreeNode *parent = NULL, *save = NULL, *current = header;
 	CHBinaryTreeStack_DECLARE();
 	CHBinaryTreeStack_INIT();
 	
@@ -76,7 +76,7 @@ static inline void adjustBalance(CHBinaryTreeNode *root, u_int32_t dir, int32_t 
 			save = current;
 		current = current->link[comparison == NSOrderedAscending]; // R on YES
 	}
-	NSAssert(save != nil, @"Illegal state, save should never be nil!");
+	NSAssert((id) save != nil, @"Illegal state, save should never be nil!");
 	
 	[anObject retain]; // Must retain whether replacing value or adding new node
 	if (current != sentinel) {
@@ -92,7 +92,7 @@ static inline void adjustBalance(CHBinaryTreeNode *root, u_int32_t dir, int32_t 
 		++count;
 		// Link from parent as the proper child, based on last comparison
 		parent = CHBinaryTreeStack_POP();
-		NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+		NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 		comparison = [parent->object compare:anObject];
 		parent->link[comparison == NSOrderedAscending] = current; // R if YES
 	}
@@ -127,7 +127,7 @@ static inline void adjustBalance(CHBinaryTreeNode *root, u_int32_t dir, int32_t 
 		// Move to the next node up the path to the root
 		current = parent;
 		parent = CHBinaryTreeStack_POP();
-		NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+		NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 		// Link from parent as the proper child, based on last comparison
 		comparison = [parent->object compare:current->object];
 		parent->link[comparison == NSOrderedAscending] = current; // R if YES
@@ -165,7 +165,7 @@ done:
 		// Single/zero child case -- replace node with non-nil child (if exists)
 		replacement = current->link[current->left == sentinel];
 		parent = CHBinaryTreeStack_POP();
-		NSAssert(parent != nil, @"Illegal state, parent should never be nil!");
+		NSAssert((id) parent != nil, @"Illegal state, parent should never be nil!");
 		isRightChild = (parent->right == current);
 		parent->link[isRightChild] = replacement;
 		free(current);

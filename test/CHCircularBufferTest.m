@@ -735,7 +735,10 @@ do { \
 	BOOL raisedException = NO;
 	@try {
 		for (NSNumber *number in buffer)
+			{
+			(void) number;						/* Avoid unused parameter warning */
 			[buffer addObject:@"bogus"];
+			}
 	}
 	@catch (NSException *exception) {
 		raisedException = YES;

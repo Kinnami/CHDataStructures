@@ -24,6 +24,7 @@
 - (void) dealloc {
 	if (inverse != nil)
 		inverse->inverse = nil; // Unlink from inverse dictionary if one exists.
+	NSAssert (objectsToKeys != NULL, @"Invalid reverse dictionary IN %p (class %@)", self, [self class]);
 	CFRelease(objectsToKeys); // The dictionary can never be null at this point.
 	[super dealloc];
 }
@@ -31,6 +32,12 @@
 - (id) initWithCapacity:(NSUInteger)numItems {
 	if ((self = [super initWithCapacity:numItems]) == nil) return nil;
 	createCollectableCFMutableDictionary(&objectsToKeys, numItems);
+	NSAssert (objectsToKeys != NULL, @"Could not create reverse dictionary IN %p (class %@)", self, [self class]);
+	if (objectsToKeys == NULL)
+		{
+		[self release];
+		self = nil;
+		}
 	return self;
 }
 

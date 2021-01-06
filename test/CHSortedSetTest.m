@@ -679,7 +679,7 @@ static NSArray *abcde;
 	NSInteger rightHeight = [self heightForSubtree:node->right isBalanced:isBalanced errorString:balanceErrors];
 	if (node->balance != (rightHeight-leftHeight)) {
 		[balanceErrors appendFormat:@". | At \"%@\" should be %ld, was %d",
-		 node->object, (rightHeight-leftHeight), node->balance];
+		 node->object, (long) (rightHeight-leftHeight), node->balance];
 		*isBalanced = NO;
 	}
 	return MAX(leftHeight, rightHeight) + 1;

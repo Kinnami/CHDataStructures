@@ -4,7 +4,7 @@
  CHMultiOrderedDictionary is very heavily based on CHMultiDictionary. Modifications to support the ordering were made by Christopher James Elphinstone Chandler
  
 	Copyright © 2013-2015	Christopher James Elphinstone Chandler, Russell Geoffrey Watts. All Rights Reserved.
-	Copyright © 2015-2020	Kinnami Software Corporation. All Rights Reserved.
+	Copyright © 2015-2021	Kinnami Software Corporation. All Rights Reserved.
 
  CHMultiDictionary:
  

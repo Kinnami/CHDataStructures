@@ -12,7 +12,7 @@
 
 	Fixes, additions, extensions, port to GNUstep by Christopher Chandler
 	Copyright © 2013-2015	Christopher James Elphinstone Chandler, Russell Geoffrey Watts. All Rights Reserved.
-	Copyright © 2015-2020	Kinnami Software Corporation. All rights reserved.
+	Copyright © 2015-2021	Kinnami Software Corporation. All rights reserved.
  */
 
 #import "CHUnbalancedTree.h"

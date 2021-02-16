@@ -34,6 +34,28 @@
 	return self;
 }
 
+#if defined (GNUSTEP)
+
+/* GNUStep's -[NSMutableSet initWithObjects: count:] adds objects in
+	reverse order, which is not very useful for an ordered set!
+	See /GNUstep/libs-base/Source/NSSet.m: line 1078.
+	So we have to reimplement it.
+*/
+- (id) initWithObjects: (const id []) objects count: (NSUInteger) count
+{
+	NSUInteger	uiCount;
+	
+	self = [self initWithCapacity: count];
+	if (self != nil)
+		{
+		for (uiCount = 0; uiCount < count; uiCount ++)
+			[self addObject: objects [uiCount]];
+		}
+	return self;
+}
+
+#endif	/* defined (GNUSTEP) */
+
 #pragma mark Querying Contents
 
 - (NSArray*) allObjects {

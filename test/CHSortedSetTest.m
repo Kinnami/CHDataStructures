@@ -444,7 +444,7 @@ static NSArray *abcde;
 	@try {
 		for (id object in set)
 			{
-			(void) object;					/* Avoid unused parameter warning */
+			(void) object;					/* Avoid unused parameter compiler warning */
 			[set addObject:[NSNumber numberWithInteger:-1]];
 			}
 	}

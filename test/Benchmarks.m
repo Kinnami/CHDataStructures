@@ -149,7 +149,7 @@ void benchmarkDeque(Class testClass) {
 			[deque appendObject:anObject];
 		startTime = timestamp();
 		for (id object in deque)
-			(void) object;					/* Avoid unused parameter warning */
+			(void) object;					/* Avoid unused parameter compiler warning */
 		printf("\t%f", timestamp() - startTime);
 		[deque release];
 	}
@@ -227,7 +227,7 @@ void benchmarkQueue(Class testClass) {
 			[queue addObject:anObject];
 		startTime = timestamp();
 		for (id object in queue)
-			(void) object;					/* Avoid unused parameter warning */
+			(void) object;					/* Avoid unused parameter compiler warning */
 		printf("\t%f", timestamp() - startTime);
 		[queue release];
 	}
@@ -305,7 +305,7 @@ void benchmarkStack(Class testClass) {
 			[stack pushObject:anObject];
 		startTime = timestamp();
 		for (id object in stack)
-			(void) object;					/* Avoid unused parameter warning */
+			(void) object;					/* Avoid unused parameter compiler warning */
 		printf("\t%f", timestamp() - startTime);
 		[stack release];
 	}
@@ -382,7 +382,7 @@ void benchmarkHeap(Class testClass) {
 			[heap addObject:anObject];
 		startTime = timestamp();
 		for (id object in heap)
-			(void) object;					/* Avoid unused parameter warning */
+			(void) object;					/* Avoid unused parameter compiler warning */
 		printf("\t%f", timestamp() - startTime);
 		[heap release];
 	}

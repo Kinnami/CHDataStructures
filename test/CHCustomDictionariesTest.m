@@ -679,7 +679,7 @@ static NSArray* keyArray;
 	@try {
 		for (id key in dictionary)
 			{
-			(void) key;						/* Avoid unused parameter warning */
+			(void) key;						/* Avoid unused parameter compiler warning */
 			[dictionary setObject:[NSNull null] forKey:[NSNumber numberWithInteger:-1]];
 			}
 	}
@@ -818,7 +818,7 @@ static NSArray* keyArray;
 	@try {
 		for (id key in dictionary)
 			{
-			(void) key;						/* Avoid unused parameter warning */
+			(void) key;						/* Avoid unused parameter compiler warning */
 			[dictionary setObject:[NSNull null] forKey:[NSNumber numberWithInteger:-1]];
 			}
 	}

@@ -85,7 +85,7 @@
 		@try {
 			for (id object in list)
 				{
-				(void) object;				/* Avoid unused parameter warning */
+				(void) object;				/* Avoid unused parameter compiler warning */
 				[list addObject:@"bogus"];
 				}
 		}

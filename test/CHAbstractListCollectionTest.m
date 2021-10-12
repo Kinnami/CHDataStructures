@@ -103,7 +103,7 @@
 	@try {
 		for (id object in collection)
 			{
-			(void) object;					/* Avoid unused parameter warning */
+			(void) object;					/* Avoid unused parameter compiler warning */
 			[collection addObject:@"bogus"];
 			}
 	}

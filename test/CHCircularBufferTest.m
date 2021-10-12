@@ -736,7 +736,7 @@ do { \
 	@try {
 		for (NSNumber *number in buffer)
 			{
-			(void) number;						/* Avoid unused parameter warning */
+			(void) number;						/* Avoid unused parameter compiler warning */
 			[buffer addObject:@"bogus"];
 			}
 	}

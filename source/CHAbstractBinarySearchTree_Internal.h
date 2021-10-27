@@ -48,7 +48,7 @@
 HIDDEN CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject);
 
 // These are used by subclasses; marked as HIDDEN to reduce external visibility.
-HIDDEN size_t kCHBinaryTreeNodeSize;
+extern HIDDEN size_t kCHBinaryTreeNodeSize;
 
 #pragma mark Stack macros
 

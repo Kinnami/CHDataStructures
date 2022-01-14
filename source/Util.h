@@ -20,7 +20,7 @@
 #define __USE_MINGW_ANSI_STDIO		1			/* Use MinGW-w64 stdio for proper C99 support, such as %llu, _vswprintf(). See https://sourceforge.net/p/mingw-w64/wiki2/printf%20and%20scanf%20family/ */
 #include <_mingw.h>
 #if defined (__MINGW64__)
-#include <sdkddkver.h>							/* Use MSys2/MinGW-w64 standard version header for 64-bit and 32-bit Windows */
+#include <sdkddkver.h>							/* Use MSYS2/MinGW-w64 standard version header for 64-bit and 32-bit Windows */
 #include <w32api.h>								/* Use the system header provided with Msys2/MinGW-w64 */
 #define Windows2008					0x0600		/* Missing from w32api.h. Values identified in /mingw64/x86_64-w64-mingw32/include/sdkkddkver.h so these can also be used to define _WIN32_WINNT */
 #define Windows7					0x0601
@@ -50,11 +50,15 @@
 
 #if defined (__linux__)
 #define _GNU_SOURCE					1			/* Required for dladdr() and struct Dl_info on Linux */
-#include <bsd/stdlib.h>										/* For arc4random(3bsd) */
+#include <bsd/stdlib.h>							/* For arc4random(3bsd) */
 #endif	/* defined (__linux__) */
 
 /* Include the essential Objective C environment umbrella header file(s) */
 #import <Foundation/Foundation.h>				/* See "Foundation Framework Reference" and "Foundation Reference Update" */
+
+#if defined (_WIN32)
+typedef uint32_t	u_int32_t;					/* Missing in Windows. Defined in sys/types.h on UNIX */
+#endif	/* defined (_WIN32) */
 
 /**
  @file Util.h

@@ -42,6 +42,7 @@
 #endif	/* !defined (_WIN32_WINNT) */
 #include <ws2tcpip.h>							/* Need to include ws2tcpip.h before windows.h to avoid warning in ws2tcpip.h */
 #include <windows.h>							/* Need to includes w32api.h and windows.h before Foundation.h to use WSAEVENT */
+#define _CRT_RAND_S								/* For rand_s() */
 #endif	/* defined (_WIN32) */
 
 #if defined (__APPLE__)

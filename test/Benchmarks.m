@@ -458,7 +458,16 @@ NSArray* randomNumberArray(NSUInteger count) {
 	NSMutableSet *objectSet = [NSMutableSet set];
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	while ([objectSet count] < count)
+		{
+#if defined (_WIN32)
+		unsigned int	ui;
+		
+		rand_s (&ui);
+		[objectSet addObject:[NSNumber numberWithInt: ui]];
+#else
 		[objectSet addObject:[NSNumber numberWithInt:arc4random()]];
+#endif	/* defined (_WIN32) */
+		}
 	[pool release];
 	return [objectSet allObjects];
 }

@@ -890,7 +890,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 			{
 			NSLog (@"Current node %p. Finished object enumeration", current);
 			[(id) state -> extra [3] release];	/* Release the object enumerator */
-			state -> extra [3] = (unsigned long) nil;		/* Mark it deleted so we know we're not in object enumeration mode */
+			state -> extra [3] = (uintptr_t) nil;	/* Mark it deleted so we know we're not in object enumeration mode */
 			current = current -> right;		/* Advance to point to the next object, and continue through the tree */
 			}
 		}

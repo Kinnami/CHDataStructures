@@ -654,7 +654,14 @@ static NSArray* keyArray;
 	NSMutableArray *keys = [NSMutableArray array];
 	NSNumber *key;
 	for (NSUInteger i = 0; i <= 20; i++) {
+#if defined (_WIN32)
+		unsigned int	ui;
+		
+		rand_s (&ui);
+		key = [NSNumber numberWithUnsignedInt:ui];
+#else
 		key = [NSNumber numberWithUnsignedInt:arc4random()];
+#endif	/* defined (_WIN32) */
 		[keys addObject:key];
 		[dictionary setObject:[NSNull null] forKey:key];
 	}
@@ -725,7 +732,14 @@ static NSArray* keyArray;
 	NSMutableArray *keys = [NSMutableArray array];
 	NSNumber *key;
 	for (NSUInteger i = 0; i <= 20; i++) {
+#if defined (_WIN32)
+		unsigned int	ui;
+		
+		rand_s (&ui);
+		key = [NSNumber numberWithUnsignedInt:ui];
+#else
 		key = [NSNumber numberWithUnsignedInt:arc4random()];
+#endif	/* defined (_WIN32) */
 		[keys addObject:key];
 		[dictionary setObject:[NSNull null] forKey:key];
 	}

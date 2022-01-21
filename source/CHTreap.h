@@ -62,6 +62,7 @@
 
 /**
  Add an object to the tree with a randomly-generated priority value. This encourages (but doesn't necessarily guarantee) well-balanced treaps. Random numbers are generated using @c arc4random and cast as an NSUInteger.
+ Windows does not have @c arc4random so @c rand_s a cryptographically secure variant of @c rand in the Windows C Runtime is used instead.
  
  @param anObject The object to add to the treap.
  

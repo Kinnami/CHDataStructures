@@ -60,7 +60,14 @@ static NSArray *abc;
 	NSMutableArray *array = [NSMutableArray array];
 	NSNumber *number;
 	for (NSUInteger count = 1; count <= 20; count++) {
+#if defined (_WIN32)
+		unsigned int	ui;
+		
+		rand_s (&ui);
+		number = [NSNumber numberWithUnsignedInt:ui];
+#else
 		number = [NSNumber numberWithUnsignedInt:arc4random()];
+#endif	/* defined (_WIN32) */
 		if ([array containsObject:number])
 			count--;
 		else

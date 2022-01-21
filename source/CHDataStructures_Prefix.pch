@@ -48,6 +48,7 @@
 #endif	/* !defined (_WIN32_WINNT) */
 #include <ws2tcpip.h>							/* Need to include ws2tcpip.h before windows.h to avoid warning in ws2tcpip.h */
 #include <windows.h>							/* Need to includes w32api.h and windows.h before Foundation.h to use WSAEVENT */
+#define _CRT_RAND_S								/* For rand_s() */
 #endif	/* defined (_WIN32) */
 
 #if defined (__APPLE__)
@@ -56,7 +57,7 @@
 
 #if defined (__linux__)
 #define _GNU_SOURCE					1			/* Required for dladdr() and struct Dl_info on Linux */
-#include <bsd/stdlib.h>										/* For arc4random(3bsd) */
+#include <bsd/stdlib.h>							/* For arc4random(3bsd) */
 #endif	/* defined (__linux__) */
 
 /* Include the essential Objective C environment umbrella header file(s) */

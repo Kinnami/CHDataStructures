@@ -18,6 +18,11 @@
 #include <bsd/stdlib.h>										/* For arc4random(3bsd) */
 #endif	/* defined (__linux__) */
 
+#if defined (_WIN32)
+#define _CRT_RAND_S											/* for rand_s() */
+#include <stdlib.h>
+#endif	/* defined (_WIN32) */
+
 #import "CHTreap.h"
 #import "CHAbstractBinarySearchTree_Internal.h"
 
@@ -39,7 +44,14 @@
 }
 
 - (void) addObject:(id)anObject {
+#if defined (__MINGW64__)
+	unsigned int	ui;
+	
+	rand_s (&ui);
+	[self addObject:anObject withPriority:ui];
+#else
 	[self addObject:anObject withPriority:arc4random()];
+#endif	/* defined (__MINGW64__) */
 }
 
 - (void) addObject:(id)anObject withPriority:(NSUInteger)priority {

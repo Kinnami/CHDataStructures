@@ -210,7 +210,7 @@ static const CFBinaryHeapCallBacks kCHBinaryHeapCallBacksDescending = {
 	// Currently (in Leopard) NSEnumerators from NSArray only return 1 each time
 	if (state->state == 0) {
 		// Create a sorted array to use for enumeration, store it in the state.
-		state->extra[4] = (unsigned long) [self allObjectsInSortedOrder];
+		state->extra[4] = (uintptr_t) [self allObjectsInSortedOrder];
 	}
 	NSArray *sorted = (NSArray*) state->extra[4];
 	NSUInteger count = [sorted countByEnumeratingWithState:state

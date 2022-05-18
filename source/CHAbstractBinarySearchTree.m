@@ -928,7 +928,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 					{
 					NSLog (@"Current node %p. Could not fit %lu sub-objects in %lu limit with with fast enumeration. Using object enumeration", current, (unsigned long) cObjects, (unsigned long) len);
 					NSAssert ((id) state -> extra [3] != nil, @"Already using an object enumerator?");	/* Note: Assume sub-collection supports objectEnumerator */
-					state -> extra [3] = (unsigned long) ((id __strong) [[current -> object objectEnumerator] retain]);	/* Note: Retain it so we don't get messed up by autorelease pools */
+					state -> extra [3] = (uintptr_t) ((id __strong) [[current -> object objectEnumerator] retain]);	/* Note: Retain it so we don't get messed up by autorelease pools */
 					do						/* CJEC, 5-Jul-13: TODO: Use state -> extra [4] to protect against a mutation of state -> extra [3] */
 						{
 						if (batchCount < len)	/* Use the object enumerator to squeeze as many objects into the limit as possible */
@@ -953,14 +953,14 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 	}
 	
 	if (current == sentinel && stackSize == 0) {
-		state->extra[0] = (unsigned long) stack;
+		state->extra[0] = (uintptr_t) stack;
 		state->state = 1; // used as a termination flag
 	}
 	else {
 		state->state    = (unsigned long) current;
-		state->extra[0] = (unsigned long) stack;
-		state->extra[1] = (unsigned long) stackCapacity;
-		state->extra[2] = (unsigned long) stackSize;
+		state->extra[0] = (uintptr_t) stack;
+		state->extra[1] = (uintptr_t) stackCapacity;
+		state->extra[2] = (uintptr_t) stackSize;
 	}
 	return batchCount;
 }

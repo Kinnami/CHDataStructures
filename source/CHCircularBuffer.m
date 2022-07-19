@@ -428,7 +428,7 @@ do { \
 		array = realloc(array, kCHPointerSize * arrayCapacity * 2);
 		// Copy wrapped-around portion to end of queue and move tail index
 		memmove(array + arrayCapacity, array, kCHPointerSize * tailIndex);
-		bzero(array, kCHPointerSize * tailIndex); // Zero the source of the copy
+		memset (array, 0, kCHPointerSize * tailIndex); // Zero the source of the copy
 		tailIndex += arrayCapacity;
 		arrayCapacity *= 2;
 	}
@@ -505,10 +505,10 @@ do { \
 		// Under GC, this prevents holding onto removed objects unnecessarily.
 		// Under retain-release, it promotes fail-fast behavior to reveal bugs.
 		if (tailIndex > copyDstIndex) {
-			bzero(array + copyDstIndex, kCHPointerSize * (tailIndex - copyDstIndex));
+			memset (array + copyDstIndex, 0, kCHPointerSize * (tailIndex - copyDstIndex));
 		} else {
-			bzero(array + copyDstIndex, kCHPointerSize * (arrayCapacity - copyDstIndex));
-			bzero(array,                kCHPointerSize * tailIndex);
+			memset (array + copyDstIndex, 0, kCHPointerSize * (arrayCapacity - copyDstIndex));
+			memset (array,                0, kCHPointerSize * tailIndex);
 		}
 		tailIndex = copyDstIndex;
 	}

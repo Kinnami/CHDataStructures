@@ -66,7 +66,7 @@ static size_t kCHSinglyLinkedListNodeSize = sizeof(CHSinglyLinkedListNode);
     mutationPointer:(unsigned long*)mutations
 {
 	if ((self = [super init]) == nil) return nil;
-	collection = (startNode != NULL) ? collection = [list retain] : nil;
+	collection = (startNode != NULL) ? [list retain] : nil;
 	current = startNode; // If startNode == endNode, will always return nil.
 	mutationCount = *mutations;
 	mutationPtr = mutations;
@@ -188,7 +188,7 @@ static size_t kCHSinglyLinkedListNodeSize = sizeof(CHSinglyLinkedListNode);
 	if (currentNode == NULL)
 		state->state = 1; // used as a termination flag
 	else
-		state->state = (unsigned long)currentNode;
+		state->state = (uintptr_t) currentNode;
 	return batchCount;
 }
 

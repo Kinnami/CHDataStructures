@@ -458,7 +458,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 
 	Note: Conforms to Foundation's naming conventions. The caller MUST release
 */
-- (Class)	newLeafCollection: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel returnsIsMultiLevel: (bool *) a_pfMultiLevel
+- (id)	newLeafCollection: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel returnsIsMultiLevel: (bool *) a_pfMultiLevel
 	{
 	unsigned int	fuiOptions;
 	SEL				pSelCompare;
@@ -957,7 +957,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 		state->state = 1; // used as a termination flag
 	}
 	else {
-		state->state    = (unsigned long) current;
+		state->state    = (uintptr_t) current;
 		state->extra[0] = (uintptr_t) stack;
 		state->extra[1] = (uintptr_t) stackCapacity;
 		state->extra[2] = (uintptr_t) stackSize;

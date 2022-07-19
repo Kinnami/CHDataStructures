@@ -255,7 +255,7 @@ static size_t kCHDoublyLinkedListNodeSize = sizeof(CHDoublyLinkedListNode);
 	if (currentNode == tail)
 		state->state = 1; // used as a termination flag
 	else
-		state->state = (unsigned long)currentNode;
+		state->state = (uintptr_t) currentNode;
     return batchCount;
 }
 

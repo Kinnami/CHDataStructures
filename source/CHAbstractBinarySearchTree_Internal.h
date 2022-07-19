@@ -111,7 +111,7 @@ extern HIDDEN size_t kCHBinaryTreeNodeSize;
 		/* Copy wrapped-around portion to end of queue and move tail index */ \
 		memmove(queue + queueCapacity, queue, kCHPointerSize * queueTail); \
 		/* Zeroing out shifted memory can simplify debugging queue problems */ \
-		/*bzero(queue, kCHPointerSize*queueTail);*/ \
+		/* memset (queue, 0, kCHPointerSize*queueTail);*/ \
 		queueTail += queueCapacity; \
 		queueCapacity *= 2; \
 	} \

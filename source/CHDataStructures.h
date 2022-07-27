@@ -52,6 +52,7 @@
 
 #if defined (__linux__)
 #define _GNU_SOURCE					1			/* Required for dladdr() and struct Dl_info on Linux */
+#define _FILE_OFFSET_BITS			64			/* Always use 64 bit inode definitions for things like struct stat */
 #include <bsd/stdlib.h>							/* For arc4random(3bsd) */
 #endif	/* defined (__linux__) */
 

@@ -123,6 +123,16 @@ ifeq ($(GNUSTEP_HOST_OS), linux-gnu)
 	$(FRAMEWORK_NAME)_TARGET_OBJCCFLAGS =
     $(FRAMEWORK_NAME)_TARGET_LDFLAGS = -fuse-ld=/usr/bin/ld.gold
 endif
+ifeq ($(GNUSTEP_HOST_OS), linux-gnueabihf)
+	$(FRAMEWORK_NAME)_USING_CLANG = 1
+	$(FRAMEWORK_NAME)_USING_GCC = 0
+	$(FRAMEWORK_NAME)_TARGET_CPPFLAGS = -D_GNU_SOURCE
+	$(FRAMEWORK_NAME)_TARGET_CFLAGS =
+	$(FRAMEWORK_NAME)_TARGET_CCFLAGS =
+	$(FRAMEWORK_NAME)_TARGET_OBJCFLAGS =
+	$(FRAMEWORK_NAME)_TARGET_OBJCCFLAGS =
+    $(FRAMEWORK_NAME)_TARGET_LDFLAGS = -fuse-ld=/usr/bin/ld.gold
+endif
 ifeq ($(GNUSTEP_HOST_OS), freebsd)
 	$(FRAMEWORK_NAME)_USING_CLANG = 1
 	$(FRAMEWORK_NAME)_USING_GCC = 0
@@ -171,14 +181,21 @@ ifeq ($(GNUSTEP_HOST_OS), mingw32)
 # Note: Assuming this is Windows 10
 # arc4random(3) is not available on Windows, so rand_s(3), a cryptographically secure variant in the Windows C Runtime is used instead
 # CJEC, 15-Feb-22: TODO: Remove this dependency on AmiShare's build environment
-	$(FRAMEWORK_NAME)_LIB_DIRS 			= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj -lTracelog -lgnustep-corebase
+	$(FRAMEWORK_NAME)_LIB_DIRS 				= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj -lTracelog -lgnustep-corebase
 else
 	ifeq ($(GNUSTEP_HOST_OS), linux-gnu)
-# Linux requires libbsd for arc4random(3bsd)
-		$(FRAMEWORK_NAME)_LIB_DIRS 		= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj -lTracelog -lgnustep-corebase -lbsd
+# 64 bit Linux requires libbsd for arc4random(3bsd)
+# Note: When building on Raspbian PiOS, libbsd.so is installed in a CPU architecture-specific subdireectory of /usr/lib/. Need symlink to the binary
+		$(FRAMEWORK_NAME)_LIB_DIRS 			= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj -lTracelog -lgnustep-corebase -lbsd
 	else
-		ifeq ($(GNUSTEP_HOST_OS), freebsd)
-			$(FRAMEWORK_NAME)_LIB_DIRS	= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj -lTracelog -lgnustep-corebase
+		ifeq ($(GNUSTEP_HOST_OS), linux-gnueabihf)
+# 32 bit ARM Linux (Tested on Raspberry Pi 0W, Pi 0W2) requires libbsd for arc4random(3bsd)
+# Note: When building on Raspbian PiOS, libbsd.so is installed in a CPU architecture-specific subdireectory of /usr/lib/. Need symlink to the binary
+			$(FRAMEWORK_NAME)_LIB_DIRS 		= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj -lTracelog -lgnustep-corebase -lbsd
+		else
+			ifeq ($(GNUSTEP_HOST_OS), freebsd)
+				$(FRAMEWORK_NAME)_LIB_DIRS	= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj -lTracelog -lgnustep-corebase
+			endif
 		endif
 	endif
 endif

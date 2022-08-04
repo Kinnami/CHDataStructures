@@ -66,6 +66,11 @@ typedef uint32_t	u_int32_t;					/* Missing in Windows. Defined in sys/types.h on
  A group of utility C functions for simplifying common exceptions and logging.
  */
 
+/* Newer Objective C environments define NS_DESIGNATED_INITIALIZER to identify designated initialisers. Define this for backward compatibility */
+#if !defined (NS_DESIGNATED_INITIALIZER)
+#define NS_DESIGNATED_INITIALIZER
+#endif	/* !defined (NS_DESIGNATED_INITIALIZER) */
+
 /* CJEC, 17-Jul-20: Add additional definitions for building with GNUstep
 */
 #if defined (GNUSTEP)

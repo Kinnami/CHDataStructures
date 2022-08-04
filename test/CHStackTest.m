@@ -14,6 +14,11 @@
 	Copyright © 2015-2022	Kinnami Software Corporation. All rights reserved.
  */
 
+/* Note: This Unit Test Code relies on OS X/Darwin 10.10, Xcode 6.4 and the Xcode Test Framework.
+			MacOS SDK must be 10.10, compiler must be Apple llvm/clang 6.1, set in the Xcode build
+			target CHDataStructuresMacTests
+*/
+
 #import <XCTest/XCTest.h>
 #import "CHStack.h"
 #import "CHListStack.h"

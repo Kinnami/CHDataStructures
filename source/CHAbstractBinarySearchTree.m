@@ -382,7 +382,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 
 /* CJEC, 19-Jul-13:  Default class used with CHTreeOptionsMultiLeaves collections
 */
-+ (Class)			ClassCollectionDefault
++ (Class)			GetClassCollection
 	{
 	return [NSMutableSet class];
 	}
@@ -477,7 +477,7 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 			}
 		}
 	if ((poNew == nil) && (fuiOptions & CHTreeOptionsMultiLeaves))	/* Haven't already got a collection, and multiple leaves are supported? */
-		poNew = [[[[self class] ClassCollectionDefault] alloc] init];
+		poNew = [[[[self class] GetClassCollection] alloc] init];
 	return poNew;
 	}
 

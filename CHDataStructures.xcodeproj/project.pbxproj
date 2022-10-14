@@ -66,6 +66,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		874E3DBB28FA0E6100B26324 /* libTracelog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 874E3DBA28FA0E6100B26324 /* libTracelog.a */; };
 		87A6F7D824C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */; };
 		87A6F7D924C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */; };
 		87A6F7DA24C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */; };
@@ -366,6 +367,7 @@
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		874E3DBA28FA0E6100B26324 /* libTracelog.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTracelog.a; path = ../../ReplicatingPeer/src/libTracelog/build/Debug/libTracelog.a; sourceTree = "<group>"; };
 		877E471124C8DAEB00A7DEFF /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; name = GNUmakefile; path = source/GNUmakefile; sourceTree = "<group>"; };
 		877E471224C8DB3200A7DEFF /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		877FC7EA262DD63500F9EC2F /* inherit_graph_0.md5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inherit_graph_0.md5; sourceTree = "<group>"; };
@@ -941,8 +943,8 @@
 		877FCA24262DD63800F9EC2F /* functions_func_0x73.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = functions_func_0x73.html; sourceTree = "<group>"; };
 		87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CHMultiOrderedDictionary.h; path = source/CHMultiOrderedDictionary.h; sourceTree = "<group>"; };
 		87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHMultiOrderedDictionary.m; path = source/CHMultiOrderedDictionary.m; sourceTree = "<group>"; };
-		87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "AmiShare-release.xcconfig"; path = "../../Makefiles/Darwin/AmiShare-release.xcconfig"; sourceTree = "<group>"; };
-		87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AmiShare.xcconfig; path = ../../Makefiles/Darwin/AmiShare.xcconfig; sourceTree = "<group>"; };
+		87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "AmiShare-release.xcconfig"; path = "../../ReplicatingPeer/Makefiles/Darwin/AmiShare-release.xcconfig"; sourceTree = "<group>"; };
+		87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AmiShare.xcconfig; path = ../../ReplicatingPeer/Makefiles/Darwin/AmiShare.xcconfig; sourceTree = "<group>"; };
 		8DC2EF5B0486A6940098B216 /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2A61A70FCB40074B77B /* CHDataStructuresIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructuresIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2B01A70FCB50074B77B /* CHDataStructures.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CHDataStructures.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1037,6 +1039,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				874E3DBB28FA0E6100B26324 /* libTracelog.a in Frameworks */,
 				E4ADBA930E88155A00B570BC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1090,6 +1093,7 @@
 		0867D691FE84028FC02AAC07 /* CHDataStructures */ = {
 			isa = PBXGroup;
 			children = (
+				874E3DBA28FA0E6100B26324 /* libTracelog.a */,
 				87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */,
 				87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */,
 				877E471224C8DB3200A7DEFF /* GNUmakefile */,
@@ -2351,6 +2355,10 @@
 				GCC_PREFIX_HEADER = source/CHDataStructures_Prefix.pch;
 				INFOPLIST_FILE = "resources/Info-Framework.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/mnt/Users/chrisc/ChrisC_Life.Qweeg/src/UNIX-Multi-Platform/AmiShare/ReplicatingPeer/src/libTracelog/build/Debug",
+				);
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -2364,6 +2372,10 @@
 				GCC_PREFIX_HEADER = source/CHDataStructures_Prefix.pch;
 				INFOPLIST_FILE = "resources/Info-Framework.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/mnt/Users/chrisc/ChrisC_Life.Qweeg/src/UNIX-Multi-Platform/AmiShare/ReplicatingPeer/src/libTracelog/build/Debug",
+				);
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;

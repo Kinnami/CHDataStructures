@@ -181,20 +181,20 @@ ifeq ($(GNUSTEP_HOST_OS), mingw32)
 # Note: Assuming this is Windows 10
 # arc4random(3) is not available on Windows, so rand_s(3), a cryptographically secure variant in the Windows C Runtime is used instead
 # CJEC, 15-Feb-22: TODO: Remove this dependency on AmiShare's build environment
-	$(FRAMEWORK_NAME)_LIB_DIRS 				= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase
+	$(FRAMEWORK_NAME)_LIB_DIRS 				= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase
 else
 	ifeq ($(GNUSTEP_HOST_OS), linux-gnu)
 # 64 bit Linux requires libbsd for arc4random(3bsd)
 # Note: When building on Raspbian PiOS, libbsd.so is installed in a CPU architecture-specific subdireectory of /usr/lib/. Need symlink to the binary
-		$(FRAMEWORK_NAME)_LIB_DIRS 			= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase -lbsd
+		$(FRAMEWORK_NAME)_LIB_DIRS 			= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase -lbsd
 	else
 		ifeq ($(GNUSTEP_HOST_OS), linux-gnueabihf)
 # 32 bit ARM Linux (Tested on Raspberry Pi 0W, Pi 0W2) requires libbsd for arc4random(3bsd)
 # Note: When building on Raspbian PiOS, libbsd.so is installed in a CPU architecture-specific subdireectory of /usr/lib/. Need symlink to the binary
-			$(FRAMEWORK_NAME)_LIB_DIRS 		= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase -lbsd
+			$(FRAMEWORK_NAME)_LIB_DIRS 		= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase -lbsd
 		else
 			ifeq ($(GNUSTEP_HOST_OS), freebsd)
-				$(FRAMEWORK_NAME)_LIB_DIRS	= -L$(AMISHARE_BASE)/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase
+				$(FRAMEWORK_NAME)_LIB_DIRS	= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase
 			endif
 		endif
 	endif

@@ -51,7 +51,9 @@
 
 #if defined (__linux__)
 #define _GNU_SOURCE					1			/* Required for dladdr() and struct Dl_info on Linux */
-#include <bsd/stdlib.h>							/* For arc4random(3bsd) */
+#if !defined (__ANDROID__)
+#include <bsd/stdlib.h>							/* For arc4random(3bsd). Android defines this in stdio.h */
+#endif	/* !defined (__ANDROID__) */
 #endif	/* defined (__linux__) */
 
 /* Include the essential Objective C environment umbrella header file(s) */

@@ -184,9 +184,16 @@ ifeq ($(GNUSTEP_HOST_OS), mingw32)
 	$(FRAMEWORK_NAME)_LIB_DIRS 				= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase
 else
 	ifeq ($(GNUSTEP_HOST_OS), linux-gnu)
-# 64 bit Linux requires libbsd for arc4random(3bsd)
+# 64 bit Linux requires libbsd for arc4random(3bsd). Android includes it in its standard libraries
 # Note: When building on Raspbian PiOS, libbsd.so is installed in a CPU architecture-specific subdirectory of /usr/lib/. Need symlink to the binary
-		$(FRAMEWORK_NAME)_LIB_DIRS 			= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase -lbsd
+		ifeq ($(AMISHARE_TARGET_DISTRO), Android)
+# CJEC, 11-Jan-23: TODO: FIXME: HACK: This makefile should not depend on any of the AMISHARE_* environment variables.
+#										So far, I have not found a good way to distinguish Android from vanilla Linux
+#										only using the GNUSTEP make environment.
+			$(FRAMEWORK_NAME)_LIB_DIRS 			= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase
+		else
+			$(FRAMEWORK_NAME)_LIB_DIRS 			= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase -lbsd
+		endif
 	else
 		ifeq ($(GNUSTEP_HOST_OS), linux-gnueabihf)
 # 32 bit ARM Linux (Tested on Raspberry Pi 0W, Pi 0W2) requires libbsd for arc4random(3bsd)

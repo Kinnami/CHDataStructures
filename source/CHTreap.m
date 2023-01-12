@@ -15,7 +15,9 @@
  */
 
 #if defined (__linux__)
-#include <bsd/stdlib.h>										/* For arc4random(3bsd) */
+#if !defined (__ANDROID__)
+#include <bsd/stdlib.h>							/* For arc4random(3bsd). Android defines this in stdio.h */
+#endif	/* !defined (__ANDROID__) */
 #endif	/* defined (__linux__) */
 
 #if defined (_WIN32)

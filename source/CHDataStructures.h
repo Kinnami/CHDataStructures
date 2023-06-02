@@ -47,12 +47,12 @@
 #endif	/* defined (_WIN32) */
 
 #if defined (__APPLE__)
-#define _DARWIN_USE_64_BIT_INODE	1			/* Always use 64 bit inode definitions for things like struct stat */
+#define _DARWIN_USE_64_BIT_INODE	1			/* Always use 64-bit inode definitions for things like struct stat */
 #endif	/* defined (__APPLE__) */
 
 #if defined (__linux__)
 #define _GNU_SOURCE					1			/* Required for dladdr() and struct Dl_info on Linux */
-#define _FILE_OFFSET_BITS			64			/* Always use 64 bit inode definitions for things like struct stat */
+#define _FILE_OFFSET_BITS			64			/* Always use 64-bit inode definitions for things like struct stat */
 #if !defined (__ANDROID__)
 #include <bsd/stdlib.h>							/* For arc4random(3bsd). Android defines this in stdio.h */
 #endif	/* !defined (__ANDROID__) */

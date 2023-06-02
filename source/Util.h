@@ -46,7 +46,7 @@
 #endif	/* defined (_WIN32) */
 
 #if defined (__APPLE__)
-#define _DARWIN_USE_64_BIT_INODE	1			/* Always use 64 bit inode definitions for things like struct stat */
+#define _DARWIN_USE_64_BIT_INODE	1			/* Always use 64-bit inode definitions for things like struct stat */
 #endif	/* defined (__APPLE__) */
 
 #if defined (__linux__)

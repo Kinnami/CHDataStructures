@@ -80,7 +80,7 @@ $(FRAMEWORK_NAME)_CLANG_LDFLAGS = -rdynamic -pthread -fexceptions -fobjc-runtime
 #							because static libraries have a related visibility
 #							problem
 #
-# CJEC, 15-Jul-20: TODO: On Windows7+ 64 bit with clang and libobjc4 (the GNUstep 2.0
+# CJEC, 15-Jul-20: TODO: On Windows7+ 64-bit with clang and libobjc4 (the GNUstep 2.0
 #							Objective C runtime library labelled libobjc2 at Github,)
 #							the above is almost certainly not what we want.
 #							We should use dynamic linking whereever possible in case
@@ -184,7 +184,7 @@ ifeq ($(GNUSTEP_HOST_OS), mingw32)
 	$(FRAMEWORK_NAME)_LIB_DIRS 				= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase
 else
 	ifeq ($(GNUSTEP_HOST_OS), linux-gnu)
-# 64 bit Linux requires libbsd for arc4random(3bsd). Android includes it in its standard libraries
+# 64-bit Linux requires libbsd for arc4random(3bsd). Android includes it in its standard libraries
 # Note: When building on Raspbian PiOS, libbsd.so is installed in a CPU architecture-specific subdirectory of /usr/lib/. Need symlink to the binary
 		ifeq ($(AMISHARE_TARGET_DISTRO), Android)
 # CJEC, 11-Jan-23: TODO: FIXME: HACK: This makefile should not depend on any of the AMISHARE_* environment variables.
@@ -196,7 +196,7 @@ else
 		endif
 	else
 		ifeq ($(GNUSTEP_HOST_OS), linux-gnueabihf)
-# 32 bit ARM Linux (Tested on Raspberry Pi 0W, Pi 0W2) requires libbsd for arc4random(3bsd)
+# 32-bit ARM Linux (Tested on Raspberry Pi 0W, Pi 0W2) requires libbsd for arc4random(3bsd)
 # Note: When building on Raspbian PiOS, libbsd.so is installed in a CPU architecture-specific subdirectory of /usr/lib/. Need symlink to the binary
 			$(FRAMEWORK_NAME)_LIB_DIRS 		= -L$(AMISHARE_BASE)/ReplicatingPeer/src/libTracelog/src/$(AMISHARE_TARGET)/obj/$(AMISHARE_TARGET_BINARY) -lTracelog -lgnustep-corebase -lbsd
 		else

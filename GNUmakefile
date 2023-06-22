@@ -10,7 +10,7 @@
 # Include the common variables defined by the Makefile Package
 include $(GNUSTEP_MAKEFILES)/common.make
 
-# Build an aggregate project
+# Build an aggregate project. CJEC, 13-Jun-23: TODO: Adapt makefiles to use parallel builds. See GNUstep Make 2.4.0 release notes at https://gnustep.github.io/resources/documentation/Developer/Make/ReleaseNotes/RELEASENOTES
 
 # CJEC, 17-Jul-20: TODO: Add subprojects to build CHDataStructures documentation and tests
 SUBPROJECTS = source

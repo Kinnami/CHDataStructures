@@ -16,7 +16,17 @@
 
 #import "Util.h"
 
+/* Define this to use the original Core Foundation implementation of CHMutableDictionary.
+	This works, but does not support fast enumeration on GNUstep, and also relies on the
+	buggy and incomplete implementation of Core FDoundation on GNUstep.
+	When not defined, CHMutableDictionary is implemented using NSMutableDictionary which in
+	turn uses the natural concrete subclass for Apple's or GNUstep's implementation.
+*/
+// #define CHMUTABLEDICTIONARY_USING_COREFOUNDATION
+
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* dictionary, NSUInteger initialCapacity);
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 
 /**
  @file CHMutableDictionary.h
@@ -32,9 +42,21 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
  @note Any method inherited from NSDictionary or NSMutableDictionary is supported by this class and its children. Please see the documentation for those classes for details.
  
  @todo Implement @c -copy and @c -mutableCopy differently (so users can actually obtain an immutable copy) and make mutation methods aware of immutability?
+
+ @note There are now 2 ways to implement CHMutableDictionary. The original source code used Core Foundation, which works well. However, it relies on the NSMutableDictionary base class to provide an implementation for
+ 		@c -countByEnumeratingWithState: @c objects: @c count: to support fast enumeration. The GNUstep implementation of NSMutableDictionary delegates this responsibility to derived classes. Consequently, an
+		alternative implementation is now availaible that uses the platform's NSMutableDictionary class cluster to provide the implementation, whose concrete private subclasses on both Apple and GNUstep implement fast
+		enumeration properly.
+		Define @c CHMUTABLEDICTIONARY_USING_COREFOUNDATION to use the Core Foundation CFMutableDictionary implementation. Undefine @c CHMUTABLEDICTIONARY_USING_COREFOUNDATION to use the Foundation NSMutableDictionary class cluster.
  */
 @interface CHMutableDictionary : NSMutableDictionary {
-	CFMutableDictionaryRef dictionary; // A Core Foundation dictionary.
+
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
+	CFMutableDictionaryRef dictionary;	// A Core Foundation dictionary.
+#else
+	NSMutableDictionary *	m_poDict;	// Foundation dictionary
+#endif	/* CHMUTABLEDICTIONARY_USING_COREFOUNDATION */
+
 }
 
 - (id) initWithCapacity:(NSUInteger)numItems NS_DESIGNATED_INITIALIZER;

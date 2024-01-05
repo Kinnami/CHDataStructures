@@ -87,7 +87,11 @@
 
 - (void) removeObjectForKey:(id)aKey {
 	[aKey retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	if (CFDictionaryContainsKey(dictionary, aKey)) {
+#else
+	if ([m_poDict objectForKey: aKey] != nil) {
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 		[super removeObjectForKey:aKey];
 		[sortedKeys removeObject:aKey];
 	}
@@ -99,7 +103,11 @@
 		CHNilArgumentException([self class], _cmd);
 	id clonedKey = [[aKey copy] autorelease];
 	[sortedKeys addObject:clonedKey];
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFDictionarySetValue(dictionary, clonedKey, anObject);
+#else
+	[m_poDict setObject: anObject forKey: clonedKey];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 @end

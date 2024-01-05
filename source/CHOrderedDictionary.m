@@ -67,7 +67,11 @@
 }
 
 - (NSUInteger) indexOfKey:(id)aKey {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	if (CFDictionaryContainsKey(dictionary, aKey))
+#else
+	if ([m_poDict objectForKey: aKey] != nil)
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 		return [keyOrdering indexOfObject:aKey];
 	else
 		return NSNotFound;
@@ -126,10 +130,18 @@
 		CHNilArgumentException([self class], _cmd);
 	
 	id clonedKey = [[aKey copy] autorelease];
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	if (!CFDictionaryContainsKey(dictionary, clonedKey)) {
+#else
+	if (nil == [m_poDict objectForKey: clonedKey]) {
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 		[keyOrdering insertObject:clonedKey atIndex:index];
 	}
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFDictionarySetValue(dictionary, clonedKey, anObject);
+#else
+	[m_poDict setObject: anObject forKey: clonedKey];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (void) removeAllObjects {
@@ -139,7 +151,11 @@
 
 - (void) removeObjectForKey:(id)aKey {
 	[aKey retain];			/* CJEC, 27-May-15: Retain while we're using the object to prevent deallocation */
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	if (CFDictionaryContainsKey(dictionary, aKey)) {
+#else
+	if ([m_poDict objectForKey: aKey] != nil) {
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 		[super removeObjectForKey:aKey];
 		[keyOrdering removeObject:aKey];
 	}
@@ -159,7 +175,11 @@
 - (void) removeObjectsForKeysAtIndexes:(NSIndexSet*)indexes {
 	NSArray* keysToRemove = [keyOrdering objectsAtIndexes:indexes];
 	[keyOrdering removeObjectsAtIndexes:indexes];
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	[(NSMutableDictionary*)dictionary removeObjectsForKeys:keysToRemove];
+#else
+	[m_poDict removeObjectsForKeys: keysToRemove];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (void) setObject:(id)anObject forKey:(id)aKey {

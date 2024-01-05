@@ -36,8 +36,13 @@
  - <a href="http://www.go4expert.com/forums/showthread.php?t=1466">BiDirHashtable</a> (C#)
  */
 @interface CHBidirectionalDictionary : CHMutableDictionary {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFMutableDictionaryRef objectsToKeys; // Used for reverse mapping.
 	CHBidirectionalDictionary* inverse; // Pointer to inverse dictionary.
+#else
+	NSMutableDictionary *		m_poDictObjectsToKeys;	/* Used for reverse mapping */
+	CHBidirectionalDictionary *	m_poBDictInverse;		/* Inverse dictionary */
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 #pragma mark Querying Contents

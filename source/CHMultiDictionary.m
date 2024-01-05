@@ -57,7 +57,11 @@ static inline NSMutableSet* createMutableSetFromObject(id object) {
 }
 
 - (NSSet*) objectsForKey:(id)aKey {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	return [[[(id)dictionary objectForKey:aKey] copy] autorelease];
+#else
+	return [[[m_poDict objectForKey:aKey] copy] autorelease];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 #pragma mark Modifying Contents

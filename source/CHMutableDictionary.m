@@ -22,6 +22,7 @@
 */
 // #define DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN		1
 
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 #pragma mark CFDictionary callbacks
 
 const void* CHDictionaryRetain(CFAllocatorRef allocator, const void *value) {
@@ -71,6 +72,7 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 	                                       &kCHDictionaryKeyCallBacks,
 	                                       &kCHDictionaryValueCallBacks);
 }
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 
 #pragma mark -
 
@@ -80,8 +82,15 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 #if defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN)
 	NSLog (@"dealloc IN %p (class %@)", self, [self class]);
 #endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
+
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	NSAssert (dictionary != NULL, @"Invalid dictionary IN %p (class %@)", self, [self class]);
 	CFRelease(dictionary); // The dictionary will never be null at this point.
+#else
+	NSAssert (m_poDict != nil, @"Invalid dictionary IN %p (class %@)", self, [self class]);
+	[m_poDict release];
+	m_poDict = nil;
+#endif	/* CHMUTABLEDICTIONARY_USING_COREFOUNDATION */
 	[super dealloc];
 }
 
@@ -94,6 +103,8 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 // Subclasses may override this as necessary, but must call back here first.
 - (id) initWithCapacity:(NSUInteger)numItems {
 	if ((self = [super init]) == nil) return nil;
+
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	createCollectableCFMutableDictionary(&dictionary, numItems);
 	NSAssert (dictionary != NULL, @"Could not create dictionary IN %p (class %@)", self, [self class]);
 	if (dictionary == NULL)
@@ -105,6 +116,20 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 	else
 		NSLog (@"Created dictionary %p IN %p (class %@)", dictionary, self, [self class]);
 #endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
+#else
+	m_poDict = [[NSMutableDictionary alloc] initWithCapacity: numItems];
+	NSAssert (m_poDict != nil, @"Could not create dictionary IN %p (class %@)", self, [self class]);
+	if (m_poDict == nil)
+		{
+		[self release];
+		self = nil;
+		}
+#if defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN)
+	else
+		NSLog (@"Created dictionary %p IN %p (class %@)", m_poDict, self, [self class]);
+#endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
+	
+#endif	/* defiend (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 	return self;
 }
 
@@ -147,20 +172,35 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 		{
 		self = [self initWithDictionary: poDict];
 		NSAssert (self != nil, @"Could not initialise CHMutableDictionary using dictionary %@ IN %p (class %@)", poDict, self, [self class]);
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 		NSAssert (dictionary != NULL, @"Could not create dictionary IN %p (class %@)", self, [self class]);
+#else
+		NSAssert (m_poDict != nil, @"Could not create dictionary IN %p (class %@)", self, [self class]);
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 		}
 #if defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN)
 	if (self != nil)
+#if defined (defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION))
 		NSLog (@"Created dictionary %p IN %p (class %@)", dictionary, self, [self class]);
+#else
+		NSLog (@"Created dictionary %p IN %p (class %@)", m_poDict, self, [self class]);
+#endif	/* defined (defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 #endif	/* defined (DEBUG_CHMUTABLEDICTIONARY_LOG_DEALLOCIN) */
 	return self;
 }
 
 - (void) encodeWithCoder:(NSCoder*)encoder {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	if ([encoder allowsKeyedCoding])
 		[encoder encodeObject: (id) dictionary forKey:@"dictionary"];
 	else
 		[encoder encodeObject: (id) dictionary];
+#else
+	if ([encoder allowsKeyedCoding])
+		[encoder encodeObject: m_poDict forKey:@"dictionary"];
+	else
+		[encoder encodeObject: m_poDict];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 #pragma mark <NSCopying>
@@ -182,55 +222,109 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
                                    objects:(id*)stackbuf
                                      count:(NSUInteger)len
 {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
+	// Note: GNUstep's NSMutableDictionary and NSDictionary classes do not provide
+	//			an implementation for this method. Instead, those classes designate
+	//			the method as the subclass's responsibility to implement, and throw
+	//			an exception.
+	//
+#if defined (GNUSTEP)
 	return [super countByEnumeratingWithState:state objects:stackbuf count:len];
+#else
+	(void) state;												/* Avoid unused parameter compiler warning */
+	(void) stackbuf;											/* Avoid unused parameter compiler warning */
+	(void) len;													/* Avoid unused parameter compiler warning */
+	
+	CHUnsupportedOperationException ([self class], _cmd);		/* Raise an exception on Apple platforms as well to be bug-for-bug compatible with GNUstep until fast enumeration works on GNUstep */
+	return 0;
+#endif	/* defined (GNUSTEP) */
+#else
+	return [m_poDict countByEnumeratingWithState: state objects: stackbuf count: len];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 #pragma mark Querying Contents
 
 - (NSUInteger) count {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	return CFDictionaryGetCount(dictionary);
+#else
+	return [m_poDict count];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (NSString *) description
 	{
 	NSString *	poszDescription;
-	
+
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	poszDescription = [NSString stringWithFormat: @"<<%@: %p>(%lu): dictionary %p>", [self class], self, (unsigned long) [self retainCount], dictionary];
+#else
+	poszDescription = [NSString stringWithFormat: @"<<%@: %p>(%lu): dictionary %@>", [self class], self, (unsigned long) [self retainCount], m_poDict];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 	return poszDescription;
 	}
 
 - (NSString*) debugDescription {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFStringRef description = CFCopyDescription(dictionary);
 	CFRelease([(id)description retain]);
 	return [(id)description autorelease];
+#else
+	return [self description];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (NSEnumerator*) keyEnumerator {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	return [(id)dictionary keyEnumerator];
+#else
+	return [m_poDict keyEnumerator];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (NSEnumerator*) objectEnumerator {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	return [(id)dictionary objectEnumerator];
+#else
+	return [m_poDict objectEnumerator];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (id) objectForKey:(id)aKey {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	return (id)CFDictionaryGetValue(dictionary, aKey);
+#else
+	return [m_poDict objectForKey: aKey];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 #pragma mark Modifying Contents
 
 - (void) removeAllObjects {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFDictionaryRemoveAllValues(dictionary);
+#else
+	[m_poDict removeAllObjects];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (void) removeObjectForKey:(id)aKey {
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFDictionaryRemoveValue(dictionary, aKey);
+#else
+	[m_poDict removeObjectForKey: aKey];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 - (void) setObject:(id)anObject forKey:(id)aKey {
 	if (anObject == nil || aKey == nil)
 		CHNilArgumentException([self class], _cmd);
+#if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFDictionarySetValue(dictionary, [[aKey copy] autorelease], anObject);
+#else
+	[m_poDict setValue: anObject forKey: [[aKey copy] autorelease]];
+#endif	/* defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION) */
 }
 
 @end

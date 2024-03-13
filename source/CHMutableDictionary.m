@@ -133,7 +133,7 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 	return self;
 }
 
-// Ovverridden to ensure that this object's dictionary member is initialised
+// Overridden to ensure that this object's dictionary member is initialised
 //	even when the argument is empty.
 // Note: Disable the compiler warning "convenience initializer should not invoke an initializer on 'super'"
 #pragma GCC diagnostic push

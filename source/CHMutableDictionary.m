@@ -136,8 +136,10 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 // Overridden to ensure that this object's dictionary member is initialised
 //	even when the argument is empty.
 // Note: Disable the compiler warning "convenience initializer should not invoke an initializer on 'super'"
+#if defined (__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wobjc-designated-initializers"
+#endif	/* defined (__clang__) */
 - (id)	initWithDictionary: (NSDictionary *) a_poDict
 	{
 	if ([a_poDict count] == 0)			/* GNUstep's -[NSDictionary initWithDictionary:] does not call the default initialiser if the argument is empty */
@@ -146,7 +148,9 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 		self = [super initWithDictionary: a_poDict];
 	return self;
 	}
+#if defined (__clang__)
 #pragma GCC diagnostic pop
+#endif	/* defined (__clang__) */
 
 #pragma mark <NSCoding>
 

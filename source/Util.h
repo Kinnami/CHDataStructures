@@ -56,7 +56,7 @@
 #endif	/* !defined (__ANDROID__) */
 #endif	/* defined (__linux__) */
 
-/* Include the essential Objective C environment umbrella header file(s) */
+/* Include the essential Objective-C environment umbrella header file(s) */
 #import <Foundation/Foundation.h>				/* See "Foundation Framework Reference" and "Foundation Reference Update" */
 
 #if defined (_WIN32)
@@ -68,7 +68,7 @@ typedef uint32_t	u_int32_t;					/* Missing in Windows. Defined in sys/types.h on
  A group of utility C functions for simplifying common exceptions and logging.
  */
 
-/* Newer Objective C environments define NS_DESIGNATED_INITIALIZER to identify designated initialisers. Define this for backward compatibility */
+/* Newer Objective-C environments define NS_DESIGNATED_INITIALIZER to identify designated initialisers. Define this for backward compatibility */
 #if !defined (NS_DESIGNATED_INITIALIZER)
 #define NS_DESIGNATED_INITIALIZER
 #endif	/* !defined (NS_DESIGNATED_INITIALIZER) */

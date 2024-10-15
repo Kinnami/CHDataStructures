@@ -58,7 +58,7 @@
 #endif	/* !defined (__ANDROID__) */
 #endif	/* defined (__linux__) */
 
-/* Include the essential Objective C environment umbrella header file(s) */
+/* Include the essential Objective-C environment umbrella header file(s) */
 #import <Foundation/Foundation.h>				/* See "Foundation Framework Reference" and "Foundation Reference Update" */
 
 // Protocols

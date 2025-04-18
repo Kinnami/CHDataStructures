@@ -128,7 +128,11 @@
 }
 
 - (void) removeKeyForObject:(id)anObject {
-	[super removeObjectForKey:[self keyForObject:anObject]];
+	id	poKey;
+	
+	poKey = [self keyForObject: anObject];
+	if (poKey != nil)
+		[super removeObjectForKey: poKey];
 #if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)
 	CFDictionaryRemoveValue(objectsToKeys, anObject);
 #else

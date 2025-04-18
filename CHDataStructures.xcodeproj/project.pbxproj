@@ -13,7 +13,6 @@
 			buildPhases = (
 			);
 			dependencies = (
-				87A6F75F24C0D10400D00AA2 /* PBXTargetDependency */,
 				87A6F76124C0D10400D00AA2 /* PBXTargetDependency */,
 				87A6F76724C0D10400D00AA2 /* PBXTargetDependency */,
 				87A6F76924C0D10400D00AA2 /* PBXTargetDependency */,
@@ -41,9 +40,7 @@
 			buildPhases = (
 			);
 			dependencies = (
-				E4FAE15F0E968F20007BB1F9 /* PBXTargetDependency */,
 				E4FAE1610E968F20007BB1F9 /* PBXTargetDependency */,
-				963818E91A7105EB0067CF59 /* PBXTargetDependency */,
 				963818EB1A7105EB0067CF59 /* PBXTargetDependency */,
 				E4FAE1630E968F20007BB1F9 /* PBXTargetDependency */,
 				E4FAE1650E968F20007BB1F9 /* PBXTargetDependency */,
@@ -66,11 +63,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		870C48FE2DB2E1170049C31C /* libTracelog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 870C48FB2DB2E0FD0049C31C /* libTracelog.a */; };
 		87A6F7D824C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */; };
 		87A6F7D924C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 87A6F7D624C0DC1F00D00AA2 /* CHMultiOrderedDictionary.h */; };
 		87A6F7DA24C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */; };
 		87A6F7DB24C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */; };
-		87E31C7B28FB4FD4003F0C3A /* libTracelog.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E31C7828FB4FA7003F0C3A /* libTracelog.a */; };
 		87E31C7E28FB4FFD003F0C3A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E31C7C28FB4FDD003F0C3A /* CoreFoundation.framework */; };
 		8DC2EF530486A6940098B216 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C1666FE841158C02AAC07 /* InfoPlist.strings */; };
 		969123AC1A7100120073C75A /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E4723A710EB91B7A006FE465 /* Util.m */; };
@@ -227,12 +224,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		87A6F76024C0D10400D00AA2 /* PBXContainerItemProxy */ = {
+		870C48FA2DB2E0FD0049C31C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			containerPortal = 870C48F62DB2E0FD0049C31C /* libTracelog.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = libTracelog;
+		};
+		870C48FC2DB2E1090049C31C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 870C48F62DB2E0FD0049C31C /* libTracelog.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = CHDataStructures;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = libTracelog;
 		};
 		87A6F76224C0D10400D00AA2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -261,27 +265,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = E43C87680EA3D35500B3B31E;
 			remoteInfo = "Disk Image";
-		};
-		87E31C7728FB4FA7003F0C3A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 87E31C7328FB4FA7003F0C3A /* libTracelog.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = libTracelog;
-		};
-		87E31C7928FB4FB0003F0C3A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 87E31C7328FB4FA7003F0C3A /* libTracelog.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = libTracelog;
-		};
-		963818E81A7105EB0067CF59 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 96E5B2A51A70FCB40074B77B;
-			remoteInfo = iOS;
 		};
 		963818EA1A7105EB0067CF59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -324,13 +307,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
 			remoteInfo = Framework;
-		};
-		E4FAE15E0E968F20007BB1F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = CHDataStructures;
 		};
 		E4FAE1600E968F20007BB1F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -382,6 +358,7 @@
 /* Begin PBXFileReference section */
 		0867D69BFE84028FC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		089C1667FE841158C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = resources/English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		870C48F62DB2E0FD0049C31C /* libTracelog.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libTracelog.xcodeproj; path = ../../ReplicatingPeer/src/libTracelog/libTracelog.xcodeproj; sourceTree = "<group>"; };
 		877E471124C8DAEB00A7DEFF /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; name = GNUmakefile; path = source/GNUmakefile; sourceTree = "<group>"; };
 		877E471224C8DB3200A7DEFF /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		877FC7EA262DD63500F9EC2F /* inherit_graph_0.md5 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = inherit_graph_0.md5; sourceTree = "<group>"; };
@@ -959,7 +936,6 @@
 		87A6F7D724C0DC1F00D00AA2 /* CHMultiOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CHMultiOrderedDictionary.m; path = source/CHMultiOrderedDictionary.m; sourceTree = "<group>"; };
 		87A6F80F24C0F7D700D00AA2 /* AmiShare-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "AmiShare-release.xcconfig"; path = "../../ReplicatingPeer/Makefiles/Darwin/AmiShare-release.xcconfig"; sourceTree = "<group>"; };
 		87A6F81024C0F7D700D00AA2 /* AmiShare.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = AmiShare.xcconfig; path = ../../ReplicatingPeer/Makefiles/Darwin/AmiShare.xcconfig; sourceTree = "<group>"; };
-		87E31C7328FB4FA7003F0C3A /* libTracelog.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libTracelog.xcodeproj; path = "/Users/chrisc/ChrisC_Life/src/UNIX-Multi-Platform/AmiShare/ReplicatingPeer/Xcode/../src/libTracelog/libTracelog.xcodeproj"; sourceTree = "<absolute>"; };
 		87E31C7C28FB4FDD003F0C3A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		8DC2EF5B0486A6940098B216 /* CHDataStructures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E5B2A61A70FCB40074B77B /* CHDataStructuresIOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CHDataStructuresIOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1055,8 +1031,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				870C48FE2DB2E1170049C31C /* libTracelog.a in Frameworks */,
 				87E31C7E28FB4FFD003F0C3A /* CoreFoundation.framework in Frameworks */,
-				87E31C7B28FB4FD4003F0C3A /* libTracelog.a in Frameworks */,
 				E4ADBA930E88155A00B570BC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1118,6 +1094,7 @@
 				E4CFCDAD0E8FD16400B0253A /* Documentation */,
 				E4FAE0F60E967A8B007BB1F9 /* Benchmarks */,
 				089C1665FE841158C02AAC07 /* Resources */,
+				873210B42DB2DEC3003AB407 /* External Frameworks and Libraries */,
 				0867D69AFE84028FC02AAC07 /* Linked Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
@@ -1128,7 +1105,6 @@
 			isa = PBXGroup;
 			children = (
 				87E31C7C28FB4FDD003F0C3A /* CoreFoundation.framework */,
-				87E31C7328FB4FA7003F0C3A /* libTracelog.xcodeproj */,
 				0867D69BFE84028FC02AAC07 /* Foundation.framework */,
 			);
 			name = "Linked Frameworks";
@@ -1203,6 +1179,22 @@
 				E4ADBB230E88174200B570BC /* CHUnbalancedTree.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		870C48F72DB2E0FD0049C31C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				870C48FB2DB2E0FD0049C31C /* libTracelog.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		873210B42DB2DEC3003AB407 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				870C48F62DB2E0FD0049C31C /* libTracelog.xcodeproj */,
+			);
+			name = "External Frameworks and Libraries";
 			sourceTree = "<group>";
 		};
 		877FC7E9262DD63500F9EC2F /* docs */ = {
@@ -1783,14 +1775,6 @@
 			path = docs;
 			sourceTree = "<group>";
 		};
-		87E31C7428FB4FA7003F0C3A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				87E31C7828FB4FA7003F0C3A /* libTracelog.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		E44B57D00E9558A000F9DD1A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -1964,7 +1948,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				87E31C7A28FB4FB0003F0C3A /* PBXTargetDependency */,
+				870C48FD2DB2E1090049C31C /* PBXTargetDependency */,
 			);
 			name = CHDataStructuresMacFramework;
 			productInstallPath = "$(HOME)/Library/Frameworks";
@@ -2074,8 +2058,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 87E31C7428FB4FA7003F0C3A /* Products */;
-					ProjectRef = 87E31C7328FB4FA7003F0C3A /* libTracelog.xcodeproj */;
+					ProductGroup = 870C48F72DB2E0FD0049C31C /* Products */;
+					ProjectRef = 870C48F62DB2E0FD0049C31C /* libTracelog.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -2094,11 +2078,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		87E31C7828FB4FA7003F0C3A /* libTracelog.a */ = {
+		870C48FB2DB2E0FD0049C31C /* libTracelog.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libTracelog.a;
-			remoteRef = 87E31C7728FB4FA7003F0C3A /* PBXContainerItemProxy */;
+			remoteRef = 870C48FA2DB2E0FD0049C31C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -2295,10 +2279,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		87A6F75F24C0D10400D00AA2 /* PBXTargetDependency */ = {
+		870C48FD2DB2E1090049C31C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
-			targetProxy = 87A6F76024C0D10400D00AA2 /* PBXContainerItemProxy */;
+			name = libTracelog;
+			targetProxy = 870C48FC2DB2E1090049C31C /* PBXContainerItemProxy */;
 		};
 		87A6F76124C0D10400D00AA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2319,16 +2303,6 @@
 			isa = PBXTargetDependency;
 			target = E43C87680EA3D35500B3B31E /* CHDataStructuresDeployment */;
 			targetProxy = 87A6F76C24C0D10400D00AA2 /* PBXContainerItemProxy */;
-		};
-		87E31C7A28FB4FB0003F0C3A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libTracelog;
-			targetProxy = 87E31C7928FB4FB0003F0C3A /* PBXContainerItemProxy */;
-		};
-		963818E91A7105EB0067CF59 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 96E5B2A51A70FCB40074B77B /* CHDataStructuresiOSFramework */;
-			targetProxy = 963818E81A7105EB0067CF59 /* PBXContainerItemProxy */;
 		};
 		963818EB1A7105EB0067CF59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -2359,11 +2333,6 @@
 			isa = PBXTargetDependency;
 			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
 			targetProxy = E4A721A90EA7AEFB00E0AC21 /* PBXContainerItemProxy */;
-		};
-		E4FAE15F0E968F20007BB1F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8DC2EF4F0486A6940098B216 /* CHDataStructuresMacFramework */;
-			targetProxy = E4FAE15E0E968F20007BB1F9 /* PBXContainerItemProxy */;
 		};
 		E4FAE1610E968F20007BB1F9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

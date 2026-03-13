@@ -3,8 +3,8 @@
 
  CHMultiOrderedDictionary is very heavily based on CHMultiDictionary. Modifications to support the ordering were made by Christopher James Elphinstone Chandler
  
-	Copyright © 2013-2015	Christopher James Elphinstone Chandler, Russell Geoffrey Watts. All Rights Reserved.
-	Copyright © 2015-2025	Kinnami Software Corporation. All Rights Reserved.
+	Copyright © 2013-2015	Christopher James Elphinstone Chandler, Russell Geoffrey Watts. All rights reserved.
+	Copyright © 2015-2026	Kinnami Software Corporation. All rights reserved.
 
  CHMultiDictionary:
 

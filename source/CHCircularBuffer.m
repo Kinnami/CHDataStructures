@@ -10,8 +10,8 @@
  The software is  provided "as is", without warranty of any kind, including all implied warranties of merchantability and fitness. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
 
 	Fixes, additions, extensions, port to GNUstep by Christopher Chandler
-	Copyright © 2013-2015	Christopher James Elphinstone Chandler, Russell Geoffrey Watts. All Rights Reserved.
-	Copyright © 2015-2025	Kinnami Software Corporation. All rights reserved.
+	Copyright © 2013-2015	Christopher James Elphinstone Chandler, Russell Geoffrey Watts. All rights reserved.
+	Copyright © 2015-2026	Kinnami Software Corporation. All rights reserved.
  */
 
 #import "CHCircularBuffer.h"

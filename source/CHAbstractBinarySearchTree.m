@@ -194,7 +194,7 @@ static CHSearchTreeHeaderObject *headerObject = nil;
 	sentinelNode = sentinel;
 	mutationCount = *mutations;
 	mutationPtr = mutations;
-	m_poaoEnumerators = nil;	/* CJEC, 1-Jul-13: By default, no array of enumerators for enumarating inside the outer-most enumerator */
+	m_poaoEnumerators = nil;	/* CJEC, 1-Jul-13: By default, no array of enumerators for enumerating inside the outer-most enumerator */
 	m_fuiOptions = a_fuiOptions;
 	return self;
 }
@@ -231,6 +231,8 @@ static CHSearchTreeHeaderObject *headerObject = nil;
 
 		if (m_poaoEnumerators == nil)
 			m_poaoEnumerators = [[NSMutableArray alloc] init];
+		else
+			NSLog (@"Enumerator count %lu. Not creating a new enumerator collection IN %@", (unsigned long)[m_poaoEnumerators count], self);
 		po = [poEnumerator nextObject];
 		NSAssert (po != nil, @"Empty Collection is illegal");
 		[m_poaoEnumerators addObject: poEnumerator];
@@ -1050,6 +1052,11 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 }
 
 /* CJEC, 2-Jul-13: Support multi-level collections by using a different compare*: method for each nesting level */
+/* CJEC, 8-Jun-26: TODO: FIXME: CHSearchTreeHeaderObject must be detected and handled explicitly as
+								it only responds to compare:, not the sub-level compares
+								So far, I have not verified that this function works properly for multi-level
+								collections. I suspect that it will fail with an unrecognized exception
+*/
 - (id)	member: (id) a_po nestingLevel: (unsigned int) a_uiNestingLevel options: (unsigned int) a_fuiOptions
 	{
 	CHBinaryTreeNode *	pBinaryTreeNodeCurrent;
@@ -1124,6 +1131,11 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 }
 
 /* CJEC, 2-Jul-13: Support multi-level collections by using a different compare*: method for each nesting level */
+/* CJEC, 8-Jun-26: TODO: FIXME: CHSearchTreeHeaderObject must be detected and handled explicitly as
+								it only responds to compare:, not the sub-level compares
+								So far, I have not verified that this function works properly for multi-level
+								collections. I suspect that it will fail with an unrecognized exception
+*/
 - (id <CHSortedSet>)	subsetFromObject: (id) a_poStart toObject: (id) a_poEnd options: (CHSubsetConstructionOptions) a_fuiSubsetConstructionOptions nestingLevel: (unsigned int) a_uiNestingLevel
 	{
 	NSEnumerator *		poEnumerator;

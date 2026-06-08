@@ -44,6 +44,9 @@
 
 // NOTE: The header and sentinel nodes are initialized to level 0 by default.
 /* CJEC, 8-Jul-13: Support multi-level trees */
+/* CJEC, 8-Jun-26: Note: CHSearchTreeHeaderObject must be detected and handled explicitly as
+							it only responds to compare:, not the sub-level compares
+*/
 - (void) addObject:(id)anObject nestingLevel: (unsigned int) a_uiNestingLevel {
 	if (anObject == nil)
 		CHNilArgumentException([self class], _cmd);
@@ -146,6 +149,9 @@ done:
 }
 
 /* CJEC, 8-Jul-13: Support multi-level trees */
+/* CJEC, 8-Jun-26: Note: CHSearchTreeHeaderObject must be detected and handled explicitly as
+							it only responds to compare:, not the sub-level compares
+*/
 - (void) removeObject:(id)anObject nestingLevel: (unsigned int) a_uiNestingLevel {
 	if (count == 0 || anObject == nil)
 		return;

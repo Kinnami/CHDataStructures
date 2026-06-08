@@ -64,6 +64,9 @@ static CHSearchTreeHeaderObject *headerObject = nil;
 	return headerObject;
 }
 
+/*	CJEC, 8-Jun-26: Note: CHSearchTreeHeaderObject must be detected and handled explicitly as
+							it only responds to compare:, not the sub-level compares
+*/
 - (NSComparisonResult) compare:(id)otherObject {
 	(void) otherObject;				/* CJEC, 3-Jul-13: Avoid unused parameter compiler warning */
 	return NSOrderedAscending;
@@ -228,7 +231,7 @@ static CHSearchTreeHeaderObject *headerObject = nil;
 
 		if (m_poaoEnumerators == nil)
 			m_poaoEnumerators = [[NSMutableArray alloc] init];
-		po = [a_po nextObject];
+		po = [poEnumerator nextObject];
 		NSAssert (po != nil, @"Empty Collection is illegal");
 		[m_poaoEnumerators addObject: poEnumerator];
 		po = [self SubcollectionEnumerate: po];
@@ -427,22 +430,25 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 	}
 
 /* CJEC, 10-Jul-13: Provide a comparison method using the comparison invocation
+
+	CJEC, 8-Jun-26: Note: CHSearchTreeHeaderObject must be detected and handled explicitly as
+							it only responds to compare:, not the sub-level compares
 */
 - (NSComparisonResult)	Compare: (NSInvocation *) a_poInvocationCompare target: (id) a_poTarget argument: (id) a_poArgument
 	{
-	NSComparisonResult	eComparisonResult;
 	id					poTarget;
 	SEL					pSelAnyObject;
+	NSComparisonResult	eComparisonResult;
 
 	if (a_poArgument != nil)
 		[a_poInvocationCompare setArgument: &a_poArgument atIndex: 2];	/* Note: Skip past hidden target (index 0) and selector (index 1) arguments for our first argument. Arguments are not retained without [poInvocationCompare retainArguments] */
 	poTarget = a_poTarget;
 	if ([self GetOptions] & CHTreeOptionsMultiLevel)	/* Multi-level collections allowed? */
 		{
-		pSelAnyObject = @selector (anyObject);	/* Identify a leaf object as fast as possible */
+		pSelAnyObject = @selector (anyObject);			/* Identify a leaf object as fast as possible */
 		while ([poTarget respondsToSelector: pSelAnyObject])
 			{
-			poTarget = [poTarget anyObject];	/* All objects in the subcollections should compare the same way at a particular nesting level so use any of them */
+			poTarget = [poTarget anyObject];			/* All objects in the subcollections should compare the same way at a particular nesting level so use any of them */
 			NSAssert (poTarget != nil, @"Empty Collection is illegal");
 			}
 		NSAssert (![poTarget respondsToSelector: @selector (count)], @"Collection object does not respond to anyObject but does respond to count");

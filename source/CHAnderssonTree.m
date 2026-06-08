@@ -55,9 +55,13 @@
 	
 	sentinel ->object = anObject; // Assure that we find a spot to insert
 
+	NSInvocation *		poInvocationCompare;
 	NSComparisonResult	comparison;
-	NSInvocation *		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: a_uiNestingLevel];	/* Note: Technically, we should use the other object as we're sending the compare*: method to it. But compare*: must be symmetric so we use the (non-nil) argument because we already have it */
 
+	if (current -> object == header -> object)			/* Detect CHSearchTreeHeaderObject explicitly */
+		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: 0];	/* CHSearchTreeHeaderObject responds only to compare: not the sub-level compares */
+	else
+ 		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: a_uiNestingLevel];	/* Note: Technically, we should use the other object as we're sending the compare*: method to it. But compare*: must be symmetric so we use the (non-nil) argument because we already have it */	
 	comparison = [self Compare: poInvocationCompare target: current -> object argument: anObject];
 	while (comparison != NSOrderedSame) {
 		CHBinaryTreeStack_PUSH(current);
@@ -153,9 +157,13 @@ done:
 	
 	sentinel ->object = anObject; // Assure that we stop at a leaf if not found.
 
+	NSInvocation *		poInvocationCompare;
 	NSComparisonResult	comparison;
-	NSInvocation *		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: a_uiNestingLevel];	/* Note: Technically, we should use the other object as we're sending the compare*: method to it. But compare*: must be symmetric so we use the (non-nil) argument because we already have it */
 
+	if (current -> object == header -> object)			/* Detect CHSearchTreeHeaderObject explicitly */
+		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: 0];	/* CHSearchTreeHeaderObject responds only to compare: not the sub-level compares */
+	else
+ 		poInvocationCompare = [[self class] InvocationCompare: anObject nestingLevel: a_uiNestingLevel];	/* Note: Technically, we should use the other object as we're sending the compare*: method to it. But compare*: must be symmetric so we use the (non-nil) argument because we already have it */	
 	comparison = [self Compare: poInvocationCompare target: current -> object argument: anObject];
 	while (comparison != NSOrderedSame) {
 		CHBinaryTreeStack_PUSH(current);

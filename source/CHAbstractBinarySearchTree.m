@@ -778,13 +778,13 @@ CHBinaryTreeNode* CHCreateBinaryTreeNodeWithObject(id anObject) {
 	fOK = (self != nil);
 	if (fOK)
 		{
-		m_fuiOptions = a_fuiOptions;
+		m_fuiOptions = a_fuiOptions;		/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 		count = 0;
-		mutations = 0;
-		sentinel = CHCreateBinaryTreeNodeWithObject (nil);
+		mutations = 0;						/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
+		sentinel = CHCreateBinaryTreeNodeWithObject (nil);	/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 		sentinel -> right = sentinel;
 		sentinel -> left = sentinel;
-		header = CHCreateBinaryTreeNodeWithObject ([CHSearchTreeHeaderObject object]);
+		header = CHCreateBinaryTreeNodeWithObject ([CHSearchTreeHeaderObject object]);	/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 		header -> right = sentinel;
 		header -> left = sentinel;
 		fOK = ((id) sentinel != nil) && ((id) header != nil);	/* CJEC, 13-Feb-15: Add checks to ensure successful initialisation */

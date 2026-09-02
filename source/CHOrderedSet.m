@@ -29,6 +29,7 @@
 }
 
 - (id) initWithCapacity:(NSUInteger)numItems {
+	ordering = nil;								/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	if ((self = [super initWithCapacity:numItems]) == nil) return nil;
 	ordering = [[CHCircularBuffer alloc] initWithCapacity:numItems];
 	return self;
@@ -188,7 +189,12 @@
                                    objects:(id*)stackbuf
                                      count:(NSUInteger)len
 {
-	return [ordering countByEnumeratingWithState:state objects:stackbuf count:len];
+	NSUInteger	cItems;
+	
+	cItems = [self count];		/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
+	if (cItems > 0)				/* Object has been fully intialised, and so the "ordering" member variable has been assigned */
+		cItems = [ordering countByEnumeratingWithState:state objects:stackbuf count:len];
+	return cItems;
 }
 
 @end

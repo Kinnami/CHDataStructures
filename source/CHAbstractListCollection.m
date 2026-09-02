@@ -26,6 +26,7 @@
 // Child classes must implement -init to initialize the "list" instance variable
 
 - (id) initWithArray:(NSArray*)anArray {
+	list = nil;							/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	if ([self init] == nil) return nil;
 	for (id anObject in anArray) {
 		[list addObject:anObject];
@@ -36,6 +37,7 @@
 #pragma mark <NSCoding>
 
 - (id) initWithCoder:(NSCoder*)decoder {
+	list = nil;							/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	if ((self = [super init]) == nil) return nil;
 	list = [[decoder decodeObjectForKey:@"list"] retain];
 	return self;

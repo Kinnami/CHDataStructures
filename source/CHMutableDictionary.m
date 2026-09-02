@@ -102,6 +102,7 @@ HIDDEN void createCollectableCFMutableDictionary(CFMutableDictionaryRef* diction
 // Note: This is the designated initializer for NSMutableDictionary and this class.
 // Subclasses may override this as necessary, but must call back here first.
 - (id) initWithCapacity:(NSUInteger)numItems {
+	m_poDict = nil;								/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	if ((self = [super init]) == nil) return nil;
 
 #if defined (CHMUTABLEDICTIONARY_USING_COREFOUNDATION)

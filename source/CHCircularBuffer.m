@@ -197,6 +197,8 @@ do { \
 
 // This is the designated initializer for CHCircularBuffer.
 - (id) initWithCapacity:(NSUInteger)capacity {
+	mutations = 0;									/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
+	count = 0;										/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	if ((self = [super init]) == nil) return nil;
 	arrayCapacity = capacity ? capacity : DEFAULT_BUFFER_SIZE;
 	array = malloc(kCHPointerSize * arrayCapacity);

@@ -122,12 +122,16 @@ static size_t kCHSinglyLinkedListNodeSize = sizeof(CHSinglyLinkedListNode);
 
 // This is the designated initializer for CHSinglyLinkedList
 - (id) initWithArray:(NSArray*)anArray {
-	if ((self = [super init]) == nil) return nil;
-	head = malloc(kCHSinglyLinkedListNodeSize);
+	mutations = 0;										/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
+	head = malloc(kCHSinglyLinkedListNodeSize);			/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	head->next = NULL;
 	tail = head;
 	count = 0;
-	mutations = 0;
+	if ((self = [super init]) == nil)
+		{
+		free (head);
+		return nil;
+		}
 	for (id anObject in anArray) {
 		[self addObject:anObject];
 	}

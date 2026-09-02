@@ -25,6 +25,7 @@
 }
 
 - (id) initWithCapacity:(NSUInteger)numItems {
+	keyOrdering = nil;									/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	if ((self = [super initWithCapacity:numItems]) == nil) return nil;
 	keyOrdering = [[CHCircularBuffer alloc] initWithCapacity:numItems];
 	return self;

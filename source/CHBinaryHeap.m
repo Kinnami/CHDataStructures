@@ -81,15 +81,20 @@ static const CFBinaryHeapCallBacks kCHBinaryHeapCallBacksDescending = {
 
 // This is the designated initializer
 - (id) initWithOrdering:(NSComparisonResult)order array:(NSArray*)anArray {
-	if ((self = [super init]) == nil) return nil;
+	mutations = 0;									/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	sortOrder = order;
 	if (sortOrder == NSOrderedAscending)
-		heap = CFBinaryHeapCreate(kCFAllocatorDefault, 0, &kCHBinaryHeapCallBacksAscending, NULL);
+		heap = CFBinaryHeapCreate(kCFAllocatorDefault, 0, &kCHBinaryHeapCallBacksAscending, NULL);	/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	else if (sortOrder == NSOrderedDescending)
-		heap = CFBinaryHeapCreate(kCFAllocatorDefault, 0, &kCHBinaryHeapCallBacksDescending, NULL);
+		heap = CFBinaryHeapCreate(kCFAllocatorDefault, 0, &kCHBinaryHeapCallBacksDescending, NULL);	/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	else
 		CHInvalidArgumentException([self class], _cmd, @"Invalid sort order.");
 	CFMakeCollectable(heap); // Works under GC, and is a no-op otherwise.
+	if ((self = [super init]) == nil)
+		{
+		CFRelease(heap); // The heap will never be null at this point.
+		return nil;
+		}
 	[self addObjectsFromArray:anArray];
 	return self;
 }

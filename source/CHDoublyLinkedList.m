@@ -185,16 +185,21 @@ static size_t kCHDoublyLinkedListNodeSize = sizeof(CHDoublyLinkedListNode);
 
 // This is the designated initializer for CHDoublyLinkedList
 - (id) initWithArray:(NSArray*)anArray {
-	if ((self = [super init]) == nil) return nil;
-	head = malloc(kCHDoublyLinkedListNodeSize);
-	tail = malloc(kCHDoublyLinkedListNodeSize);
+	mutations = 0;									/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
+	head = malloc(kCHDoublyLinkedListNodeSize);		/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
+	tail = malloc(kCHDoublyLinkedListNodeSize);		/* CJEC, 2-Sep-26: Note: NSSet on Apple Foundation defines -[NSFastEnumeration countByEnumeratingWithState: objects: count:] as a primitive method if NSFastEnumeration is supported. Consequently, -[NSFastEnumeration countByEnumeratingWithState: objects: count:] must work for incompletely initialised derived classes. The member variables it uses must be initialised */
 	head->object = tail->object = nil;
 	head->next = tail;
 	head->prev = NULL;
 	tail->next = NULL;
 	tail->prev = head;
 	count = 0;
-	mutations = 0;
+	if ((self = [super init]) == nil)
+		{
+		free (tail);
+		free (head);
+		return nil;
+		}
 	for (id anObject in anArray) {
 		[self addObject:anObject];
 	}
